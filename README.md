@@ -6,3 +6,4 @@ Integrantes:
 - Juancarlos Bustamante 
 - Elmerson Torres 
 
+-creada navbar y unida la rama navbar con la principal
