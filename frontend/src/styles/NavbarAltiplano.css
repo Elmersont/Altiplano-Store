@@ -51,6 +51,7 @@
   .cerrar-button {
     padding: 5px 10px;
     border: none;
+    background-color: #c40e0e!important;   
     color: white;
     border-radius: 10px;
     cursor: pointer;
@@ -59,7 +60,6 @@
     display: inline-block;
   }
 
-  
   .cerrar-button:hover {
     background-color: #c40e0e!important;
   }
@@ -67,7 +67,7 @@
   .rol-button {
     padding: 5px 10px;
     border: none;
-  
+    background-color: #c6bfab!important;
     color: white;
     border-radius: 10px;
     cursor: pointer;
