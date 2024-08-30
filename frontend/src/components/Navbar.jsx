@@ -37,15 +37,15 @@ function NavbarAltiplano() {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
-            <Nav.Link className="nav-item-hover">
+            <Nav.Link as={Link} to="/" className="nav-item-hover">
               <span className="nav-text">Inicio</span>
               <button className="custom-button">Inicio</button>
             </Nav.Link>
-            <Nav.Link className="nav-item-hover">
+            <Nav.Link as={Link} to="/tienda" className="nav-item-hover">
               <span className="nav-text">Tienda</span>
               <button className="custom-button">Tienda</button>
             </Nav.Link>
-            <Nav.Link className="nav-item-hover">
+            <Nav.Link as={Link} to="/conocenos" className="nav-item-hover">
               <span className="nav-text">Conócenos</span>
               <button className="custom-button">Conócenos</button>
             </Nav.Link>
