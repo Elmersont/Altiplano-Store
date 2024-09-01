@@ -23,7 +23,7 @@ function NavbarAltiplano() {
   };
 
   return (
-    <Navbar expand="lg" className="bg-body-tertiary" fixed="top">
+    <Navbar expand="lg" className="bg-body-tertiary navbar-fixed-top" fixed="top">
       <Container fluid>
         <Navbar.Brand as={Link} to="/">
           <img
@@ -57,7 +57,7 @@ function NavbarAltiplano() {
             {user ? (
               <>
                 <span className="navbar-text me-3">
-                  Hola, {user.name} 
+                  Bienvenido {user.name} 
                 </span>
                 <button className="cerrar-button" onClick={logout}>
                   Cerrar sesión

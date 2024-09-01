@@ -1,3 +1,7 @@
+.navbar-fixed-top {
+  margin-top: 10px !important;
+}
+
 .nav-item-hover {
     position: relative !important;
     display: inline-block !important;
