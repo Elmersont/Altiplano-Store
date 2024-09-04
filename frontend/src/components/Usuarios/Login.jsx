@@ -44,6 +44,16 @@ const Login = () => {
       <div className={styles.passwordForgotten}>
         <Link to="/recuperar-contrasena">¿Olvidaste tu contraseña?</Link>
       </div>
+
+      <hr></hr>
+
+      <div>
+        <Link to="/registro">
+        <button style={{ backgroundColor: '#c6bfab', color: '#FFFFFF', border: 'none', padding: '10px 20px', cursor: 'pointer', borderRadius: '4px' }}>
+          Registrarse
+         </button> 
+        </Link>
+      </div>
     </div>
   );
 };
