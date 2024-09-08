@@ -1,9 +1,17 @@
 import React from 'react';
 import FooterAltiplano from '../components/Footer.jsx';
 import { Container, Row, Col, Button } from 'react-bootstrap'; 
+import { useNavigate } from 'react-router-dom';
 import '../styles/Home.css';
 
 function Home() {
+
+  const navigate = useNavigate();
+
+  const handleButtonClick = () => {
+    navigate('/personalizacion');
+  };
+
   return (
     <>
       <section className="hero-section d-flex align-items-center justify-content-center text-center">
@@ -14,7 +22,7 @@ function Home() {
               <p className="lead">
                 Cada puerta es un lienzo en blanco, y cada una de nuestras obras busca manifestar ese arte que sólo se puede ver y vivir en tu hogar. 
               </p>
-              <Button variant="primary" size="lg" className="mt-3">
+              <Button variant="primary" size="lg" className="mt-3" onClick={handleButtonClick}>
                 Personaliza tu puerta aquí
               </Button>
             </Col>

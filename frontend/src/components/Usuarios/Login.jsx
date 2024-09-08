@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom'; 
 import styles from '../../styles/Usuarios.module.css';
 
 const Login = () => {
   const [formData, setFormData] = useState({ email: '', contrasena: '' });
   const [mensaje, setMensaje] = useState('');
+  const navigate = useNavigate(); // Inicializa useNavigate
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -12,9 +13,12 @@ const Login = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // backend
+    // Lógica de autenticación con backend
     console.log('Iniciando sesión con:', formData);
+
+    // Simula un inicio de sesión exitoso
     setMensaje('Inicio de sesión exitoso.');
+    navigate('/perfil'); // Redirige a la página de perfil
   };
 
   return (
@@ -37,12 +41,30 @@ const Login = () => {
           onChange={handleChange}
           required
         />
-        <button type="submit">Iniciar Sesión</button>
+        <button type="submit">Iniciar Sesión</button> {/* Botón para iniciar sesión */}
       </form>
       {mensaje && <p>{mensaje}</p>}
       
       <div className={styles.passwordForgotten}>
         <Link to="/recuperar-contrasena">¿Olvidaste tu contraseña?</Link>
+      </div>
+
+      <hr />
+
+      <div>
+        <Link to="/registro">
+          <button 
+            style={{ 
+              backgroundColor: '#c6bfab', 
+              color: '#FFFFFF', 
+              border: 'none', 
+              padding: '10px 20px', 
+              cursor: 'pointer', 
+              borderRadius: '4px' 
+            }}>
+            Registrarse
+          </button> 
+        </Link>
       </div>
     </div>
   );
