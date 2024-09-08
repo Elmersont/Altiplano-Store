@@ -1,0 +1,21 @@
+/* src/styles/Conocenos.css */
+.conocenos-container {
+    padding-top: 80px; /* Espacio para evitar superposición con la navbar fija */
+    padding-bottom: 50px;
+  }
+  
+  .conocenos-container h1 {
+    color: #282A2D; /* Color principal para el título */
+    font-weight: bold;
+  }
+  
+  .conocenos-container p {
+    color: #4A4A4A;
+    font-size: 1.1rem;
+  }
+  
+  .conocenos-container img {
+    max-width: 100%;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra para la imagen */
+  }

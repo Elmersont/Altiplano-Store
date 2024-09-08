@@ -9,6 +9,7 @@ import Registro from './components/Usuarios/Registro.jsx';
 import PerfilUsuario from './components/Usuarios/PerfilUsuario.jsx';
 import MisFavoritos from './components/Usuarios/MisFavoritos.jsx';
 import NavbarAltiplano from './components/Navbar.jsx';
+import Conocenos from './pages/Conocenos';
 import { AuthProvider } from './context/AutentificacionContext.jsx';
 
 function App() {
@@ -25,6 +26,7 @@ function App() {
           <Route path="/registro" element={<Registro />} />
           <Route path="/perfil" element={<PerfilUsuario />} />
           <Route path="/perfil/favoritos" element={<MisFavoritos />} />
+          <Route path="/conocenos" element={<Conocenos />} />
           <Route path="*" element={<h1>Vista no existente</h1>} />
         </Routes>
       </BrowserRouter>
