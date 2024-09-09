@@ -1,15 +1,19 @@
+// routes.js
 import express from 'express';
 import { userController } from '../controllers/userController.js';
-const router = express.Router()
+import { verifyToken } from '../middlewares/autentificaciónMiddleware.js';
 
-router.get('/', userController.home)
+const router = express.Router();
 
-router.post('/register', userController.register)
+// Rutas sin autentificación
+router.get('/', userController.home); 
+router.post('/register', userController.register); 
+router.post('/login', userController.login); 
 
-router.post('/login', userController.login)
+// Rutas protegida
+router.get('/protected', verifyToken, userController.protectedRoute);
 
-router.get('/protected',userController.verifyToken)
+// Ruta para manejar 404
+router.get('*', userController.notFound); 
 
-router.get('*', userController.notFound)
-
-export default router
+export default router;
