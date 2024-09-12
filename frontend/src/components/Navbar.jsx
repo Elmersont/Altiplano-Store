@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom'; 
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
@@ -9,17 +9,12 @@ import '../styles/NavbarAltiplano.css';
 const logoNavbar = '/assets/images/logoNavbar.png';
 
 function NavbarAltiplano() {
-  const { user, login, logout } = useAuth(); //  estado y funcion del contexto de autenticación
+  const { user, logout } = useAuth(); // Retira la función de login simulada
+  const navigate = useNavigate(); // Hook para redireccionar
 
   // Función para simular el inicio de sesión SACAR CUANDOO TENGAMOS EL FORMULARIO
   const handleLogin = () => {
-    const userName = prompt('Introduce tu nombre'); // Solicitar el nombre del usuario
-    const userRole = prompt('Introduce tu rol (admin/user)'); // Solicitar el rol (admin o user)
-    if (userName && (userRole === 'admin' || userRole === 'user')) {
-      login(userName, userRole); // Ejecuta la función de login con el nombre y rol
-    } else {
-      alert('Rol no válido, usa "admin" o "user"'); // Mensaje de error si el rol es incorrecto
-    }
+    navigate('/login'); // Redirige a la página de login
   };
 
   return (

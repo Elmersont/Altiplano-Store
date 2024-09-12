@@ -1,0 +1,78 @@
+.cuestionarioContainer {
+  width: 90%;
+  max-width: 800px;
+  margin: 0 auto;
+  margin-top: 140px;
+  padding: 20px;
+  background-color: #FFFFFF;
+  border: 1px solid #C6BFAB;
+  border-radius: 8px;
+}
+
+h2, h3 {
+  color: #282A2D;
+}
+
+.cuestionarioButton {
+  background-color: #C6BFAB;
+  color: #282A2D;
+  border: none;
+  padding: 10px 20px;
+  margin: 10px 5px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.cuestionarioButton.selected {
+  background-color: #282A2D;
+  color: #FFFFFF;
+}
+
+.navButton {
+  background-color: #FFA500;
+  color: #FFFFFF;
+  margin-top: 20px;
+  padding: 10px 15px;
+  font-size: 1rem;
+  border-radius: 4px;
+}
+
+.navButton:hover {
+  background-color: #FF8C00;
+}
+
+.actionButtons {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.actionButton {
+  background-color: #4CAF50;
+  color: #FFFFFF;
+  padding: 10px 20px;
+  font-size: 1rem;
+  cursor: pointer;
+  border-radius: 4px;
+  border: none;
+}
+
+.actionButton:hover {
+  background-color: #45A049;
+}
+
+
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 25px;
+  height: 25px;
+  background: #282A2D;
+  cursor: pointer;
+  border-radius: 50%;
+}
+
+.subcategorySection {
+  margin-top: 20px;
+}
