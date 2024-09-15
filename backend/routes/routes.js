@@ -10,6 +10,6 @@ router.post('/login', userController.login);
 
 router.get('/protected', userController.verifyToken);
 
-router.get('*', userController.notFound);
+router.all('*', userController.notFound); 
 
 export default router;

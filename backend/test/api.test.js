@@ -58,10 +58,10 @@ describe('API Routes Testing', () => {
 
     const res = await request(app)
       .get('/protected')
-      .set('Cookie', `token=${token}`)
-      .expect(200);
-
-    console.log(res.text); 
+      .set('Cookie', `token=${token}`);
+    
+    expect(res.statusCode).toEqual(200);
+    expect(res.text).toContain('Token verificado correctamente');
   }, 10000);  
 
   it('should return 404 for an unknown route', async () => {
