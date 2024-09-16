@@ -29,7 +29,7 @@ function App() {
           <Route path="/perfil" element={<PerfilUsuario />} />
           <Route path="/perfil/favoritos" element={<MisFavoritos />} />
           <Route path="/conocenos" element={<Conocenos />} />
-          <Route path='/Store' element= {<Store/>} />
+          <Route path='/tienda' element= {<Store/>} />
           <Route path='/product/:id' element={<ProductDetail/>} />
           <Route path="*" element={<h1>Vista no existente</h1>} />
         </Routes>
