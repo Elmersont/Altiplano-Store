@@ -1,24 +1,42 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom'; 
 import styles from '../../styles/Usuarios.module.css';
+import { useAuth } from '../../context/AutentificacionContext'; 
 
 const Login = () => {
   const [formData, setFormData] = useState({ email: '', contrasena: '' });
   const [mensaje, setMensaje] = useState('');
-  const navigate = useNavigate(); // Inicializa useNavigate
+  const { login } = useAuth(); 
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Lógica de autenticación con backend
-    console.log('Iniciando sesión con:', formData);
+    
+    try {
+      // Hacemos la solicitud de inicio de sesión al backend
+      const response = await fetch('http://localhost:3001/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email: formData.email, password: formData.contrasena }),
+      });
 
-    // Simula un inicio de sesión exitoso
-    setMensaje('Inicio de sesión exitoso.');
-    navigate('/perfil'); // Redirige a la página de perfil
+      const data = await response.json();
+      if (response.ok && data.token) {
+        login(data.token); // Guardamos el token en el contexto de autenticación
+        navigate('/perfil'); // Redirigimos a la página de perfil
+      } else {
+        setMensaje('Error en la autenticación');
+      }
+    } catch (error) {
+      console.error('Error en la autenticación:', error);
+      setMensaje('Error en la solicitud');
+    }
   };
 
   return (
@@ -41,7 +59,7 @@ const Login = () => {
           onChange={handleChange}
           required
         />
-        <button type="submit">Iniciar Sesión</button> {/* Botón para iniciar sesión */}
+        <button type="submit">Iniciar Sesión</button>
       </form>
       {mensaje && <p>{mensaje}</p>}
       

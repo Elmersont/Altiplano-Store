@@ -1,11 +1,14 @@
 import React, { useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 import styles from '../../styles/Cuestionario.module.css';
 
 const CuestionarioPersonalizacion = () => {
+  const { id } = useParams(); 
   const [answers, setAnswers] = useState({});
   const [currentStep, setCurrentStep] = useState(1);
-  const [width, setWidth] = useState(45);
-  const [height, setHeight] = useState(200);
+  const [width, setWidth] = useState(45); 
+  const [height, setHeight] = useState(200); 
+  const navigate = useNavigate(); 
 
   const handleOptionSelect = (question, answer) => {
     setAnswers(prev => ({ ...prev, [question]: answer }));
@@ -40,11 +43,49 @@ const CuestionarioPersonalizacion = () => {
     alert("Por favor completa todas las opciones antes de continuar.");
   };
 
+  // Función para calcular el precio en base a las dimensiones seleccionadas
+  const calcularPrecio = () => {
+    let precioBase;
+    
+    // Definir el precio base según el ID del producto
+    switch (id) {
+      case '1':
+        precioBase = 189990; // Producto 1
+        break;
+      case '2':
+        precioBase = 279390; // Producto 2
+        break;
+      case '3':
+        precioBase = 303000; // Producto 3
+        break;
+      default:
+        precioBase = 189990; // Precio base por defecto (puedes ajustarlo según lo que necesites)
+        break;
+    }
+
+    const anchoBase = 45; // cm
+    const altoBase = 200; // cm
+    const areaBase = anchoBase * altoBase; // Área base (45 cm * 200 cm = 9.000 cm²)
+    const areaSeleccionada = width * height; // Área seleccionada (ancho * altura seleccionados)
+    const factorTamaño = areaSeleccionada / areaBase; // Factor de ajuste
+    return Math.round(precioBase * factorTamaño); // Precio ajustado
+  };
+
   const handleAddToCart = () => {
     if (isFormComplete()) {
-      console.log('Producto agregado al carrito con las siguientes configuraciones:');
-      console.log(`Width: ${width}, Height: ${height}`);
-      window.location.href = '/carrito';
+      const productoCarrito = {
+        id: id, 
+        name: `Producto ${id}`,
+        width: width,
+        height: height,
+        price: calcularPrecio(), 
+        quantity: 1,
+        dimensions: `${width}cm x ${height}cm`
+      };
+      const carritoActual = JSON.parse(localStorage.getItem('carrito')) || [];
+      const nuevoCarrito = [...carritoActual, productoCarrito];
+      localStorage.setItem('carrito', JSON.stringify(nuevoCarrito)); 
+      navigate('/carrito'); 
     } else {
       handleIncompleteForm();
     }
@@ -52,14 +93,20 @@ const CuestionarioPersonalizacion = () => {
 
   const handleSaveLienzo = () => {
     if (isFormComplete()) {
-      console.log('Lienzo guardado en favoritos');
+      const lienzoFavorito = {
+        id: id,
+        width: width,
+        height: height,
+      };
+      const favoritosActuales = JSON.parse(localStorage.getItem('favoritos')) || [];
+      const nuevosFavoritos = [...favoritosActuales, lienzoFavorito];
+      localStorage.setItem('favoritos', JSON.stringify(nuevosFavoritos)); 
       alert('Tu lienzo ha sido guardado en tus favoritos.');
+      navigate('/perfil/favoritos'); 
     } else {
       handleIncompleteForm();
     }
   };
-
-  const isSelected = (question, option) => answers[question] === option;
 
   const isFormComplete = () => {
     return (
@@ -72,19 +119,28 @@ const CuestionarioPersonalizacion = () => {
 
   return (
     <div className={styles.cuestionarioContainer}>
+      {/* Mostrar el precio actualizado */}
+      <div className={styles.precioActual}>
+        <h4>Precio actual: ${calcularPrecio().toLocaleString('es-CL')}</h4>
+      </div>
+
+      {/* Mostrar el producto ID en el cuestionario */}
+      <h3>Configurando producto ID: {id}</h3>
+
+      {/* Configuración de hojas y manillas */}
       {currentStep === 1 && (
         <>
           <h3>Configura tu puerta</h3>
           <div>
             <label>Hojas del lienzo:</label>
             <button 
-              className={isSelected('Hojas del lienzo', 'single') ? `${styles.cuestionarioButton} ${styles.selected}` : styles.cuestionarioButton}
+              className={answers['Hojas del lienzo'] === 'single' ? `${styles.cuestionarioButton} ${styles.selected}` : styles.cuestionarioButton}
               onClick={() => handleOptionSelect('Hojas del lienzo', 'single')}
             >
               Single
             </button>
             <button 
-              className={isSelected('Hojas del lienzo', 'double') ? `${styles.cuestionarioButton} ${styles.selected}` : styles.cuestionarioButton}
+              className={answers['Hojas del lienzo'] === 'double' ? `${styles.cuestionarioButton} ${styles.selected}` : styles.cuestionarioButton}
               onClick={() => handleOptionSelect('Hojas del lienzo', 'double')}
             >
               Double
@@ -115,19 +171,19 @@ const CuestionarioPersonalizacion = () => {
           <div>
             <label>Orientación de la manilla:</label>
             <button 
-              className={isSelected('Orientación de la manilla', 'derecha') ? `${styles.cuestionarioButton} ${styles.selected}` : styles.cuestionarioButton}
+              className={answers['Orientación de la manilla'] === 'derecha' ? `${styles.cuestionarioButton} ${styles.selected}` : styles.cuestionarioButton}
               onClick={() => handleOptionSelect('Orientación de la manilla', 'derecha')}
             >
               Derecha
             </button>
             <button 
-              className={isSelected('Orientación de la manilla', 'izquierda') ? `${styles.cuestionarioButton} ${styles.selected}` : styles.cuestionarioButton}
+              className={answers['Orientación de la manilla'] === 'izquierda' ? `${styles.cuestionarioButton} ${styles.selected}` : styles.cuestionarioButton}
               onClick={() => handleOptionSelect('Orientación de la manilla', 'izquierda')}
             >
               Izquierda
             </button>
             <button 
-              className={isSelected('Orientación de la manilla', 'n/a') ? `${styles.cuestionarioButton} ${styles.selected}` : styles.cuestionarioButton}
+              className={answers['Orientación de la manilla'] === 'n/a' ? `${styles.cuestionarioButton} ${styles.selected}` : styles.cuestionarioButton}
               onClick={() => handleOptionSelect('Orientación de la manilla', 'n/a')}
             >
               N/A
@@ -139,17 +195,18 @@ const CuestionarioPersonalizacion = () => {
         </>
       )}
 
+      {/* Interior o exterior */}
       {currentStep === 2 && (
         <>
           <h3>Tu Puerta estará en:</h3>
           <button 
-            className={isSelected('Tu Puerta estará en', 'interior') ? `${styles.cuestionarioButton} ${styles.selected}` : styles.cuestionarioButton}
+            className={answers['Tu Puerta estará en'] === 'interior' ? `${styles.cuestionarioButton} ${styles.selected}` : styles.cuestionarioButton}
             onClick={() => handleOptionSelect('Tu Puerta estará en', 'interior')}
           >
             Interior
           </button>
           <button 
-            className={isSelected('Tu Puerta estará en', 'exterior') ? `${styles.cuestionarioButton} ${styles.selected}` : styles.cuestionarioButton}
+            className={answers['Tu Puerta estará en'] === 'exterior' ? `${styles.cuestionarioButton} ${styles.selected}` : styles.cuestionarioButton}
             onClick={() => handleOptionSelect('Tu Puerta estará en', 'exterior')}
           >
             Exterior
@@ -161,29 +218,30 @@ const CuestionarioPersonalizacion = () => {
         </>
       )}
 
+      {/* Estilo de cierre */}
       {currentStep === 3 && (
         <>
           <h3>El estilo de cierre de tu puerta será:</h3>
           <button 
-            className={isSelected('Estilo de cierre de tu puerta será', 'Clásica') ? `${styles.cuestionarioButton} ${styles.selected}` : styles.cuestionarioButton}
+            className={answers['Estilo de cierre de tu puerta será'] === 'Clásica' ? `${styles.cuestionarioButton} ${styles.selected}` : styles.cuestionarioButton}
             onClick={() => handleOptionSelect('Estilo de cierre de tu puerta será', 'Clásica')}
           >
             Clásica
           </button>
           <button 
-            className={isSelected('Estilo de cierre de tu puerta será', 'Granero') ? `${styles.cuestionarioButton} ${styles.selected}` : styles.cuestionarioButton}
+            className={answers['Estilo de cierre de tu puerta será'] === 'Granero' ? `${styles.cuestionarioButton} ${styles.selected}` : styles.cuestionarioButton}
             onClick={() => handleOptionSelect('Estilo de cierre de tu puerta será', 'Granero')}
           >
             Granero
           </button>
           <button 
-            className={isSelected('Estilo de cierre de tu puerta será', 'Pivotante') ? `${styles.cuestionarioButton} ${styles.selected}` : styles.cuestionarioButton}
+            className={answers['Estilo de cierre de tu puerta será'] === 'Pivotante' ? `${styles.cuestionarioButton} ${styles.selected}` : styles.cuestionarioButton}
             onClick={() => handleOptionSelect('Estilo de cierre de tu puerta será', 'Pivotante')}
           >
             Pivotante
           </button>
           <button 
-            className={isSelected('Estilo de cierre de tu puerta será', 'Bolsillo') ? `${styles.cuestionarioButton} ${styles.selected}` : styles.cuestionarioButton}
+            className={answers['Estilo de cierre de tu puerta será'] === 'Bolsillo' ? `${styles.cuestionarioButton} ${styles.selected}` : styles.cuestionarioButton}
             onClick={() => handleOptionSelect('Estilo de cierre de tu puerta será', 'Bolsillo')}
           >
             Bolsillo
@@ -204,7 +262,7 @@ const CuestionarioPersonalizacion = () => {
               }} 
               className={styles.actionButton}
             >
-              Ir al carrito de compras
+              Agregar al carrito de compras
             </button>
             <button 
               onClick={() => {

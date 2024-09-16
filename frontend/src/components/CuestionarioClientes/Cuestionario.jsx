@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import styles from '../../styles/Cuestionario.module.css';
 
 const Cuestionario = () => {
   const [selectedOption, setSelectedOption] = useState('');
   const [selectedSubCategory, setSelectedSubCategory] = useState('');
+  const navigate = useNavigate(); 
 
   const handleSelectOption = (option) => {
     setSelectedOption(option);
@@ -12,6 +14,36 @@ const Cuestionario = () => {
 
   const handleSelectSubCategory = (subcategory) => {
     setSelectedSubCategory(subcategory);
+  };
+
+  // Función para manejar la redirección según la subcategoría seleccionada
+  const handleGoToProduct = () => {
+    // Para la opción 'Uno'
+    if (selectedOption === 'Uno') {
+      if (selectedSubCategory === 'Clase') {
+        navigate('/product/1');
+      } else if (selectedSubCategory === 'Rupturista') {
+        navigate('/product/2');
+      } else if (selectedSubCategory === 'Rústica') {
+        navigate('/product/3');
+      }
+    }
+
+    // Para la opción 'Dos'
+    if (selectedOption === 'Dos') {
+      if (selectedSubCategory === 'Elegante') {
+        navigate('/product/1');
+      } else if (selectedSubCategory === 'Nativa') {
+        navigate('/product/1');
+      } else if (selectedSubCategory === 'Rústica') {
+        navigate('/product/3');
+      }
+    }
+
+    // Para la opción 'Tres'
+    if (selectedOption === 'Tres' && selectedSubCategory === 'Especiales') {
+      navigate('/product/3');
+    }
   };
 
   return (
@@ -41,6 +73,7 @@ const Cuestionario = () => {
       {selectedOption && (
         <div className={styles.subcategorySection}>
           <h3>Selecciona una subcategoría</h3>
+
           {selectedOption === 'Uno' && (
             <>
               <button
@@ -63,6 +96,7 @@ const Cuestionario = () => {
               </button>
             </>
           )}
+
           {selectedOption === 'Dos' && (
             <>
               <button
@@ -85,6 +119,7 @@ const Cuestionario = () => {
               </button>
             </>
           )}
+
           {selectedOption === 'Tres' && (
             <>
               <button
@@ -98,8 +133,9 @@ const Cuestionario = () => {
         </div>
       )}
 
+      {/* Mostrar el botón de redirección cuando hay una subcategoría seleccionada */}
       {selectedSubCategory && (
-        <button className={styles.navButton}>Ir a ver lienzos</button>
+        <button className={styles.navButton} onClick={handleGoToProduct}>Ir a ver lienzos</button>
       )}
     </div>
   );

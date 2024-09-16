@@ -10,9 +10,17 @@ const home = (req, res) => {
 const register = async (req, res) => {
     try {
         const { nombre, email, password, telefono, region, ciudad, direccion } = req.body;
-        const result = await userModel.addUser({ nombre, email, password, telefono, region, ciudad, direccion });
-        res.status(200).send('Usuario creado con éxito');
-        console.log(result);
+        
+        // Encriptar la contraseña antes de almacenarla
+        const hashedPassword = await bcrypt.hash(password, 10);
+
+        const result = await userModel.addUser({ nombre, email, password: hashedPassword, telefono, region, ciudad, direccion });
+        
+        if (result) {
+            res.status(200).send('Usuario creado con éxito');
+        } else {
+            res.status(400).send('Error al crear el usuario');
+        }
     } catch (error) {
         res.status(500).send(error.message);
     }
@@ -21,16 +29,24 @@ const register = async (req, res) => {
 const login = async (req, res) => {
     try {
         const { email, password } = req.body;
-        const user = await userModel.getUser({ email, password });
+        const user = await userModel.getUserByEmail(email);
+
         if (!user) {
-            res.status(401).send('Usuario no existe');
-        } else {
-            const token = jwt.sign({ email, password }, process.env.JWT_SECRET, { expiresIn: '1h' });
-            res
-                .status(200)
-                .cookie('token', token, { httpOnly: true, secure: false }) // Añadido 'httpOnly' y 'secure' para mejorar seguridad
-                .send('User logged in');
+            return res.status(401).send('Usuario no existe');
         }
+
+        // Comparar la contraseña encriptada con la proporcionada
+        const isPasswordValid = await bcrypt.compare(password, user.password);
+        if (!isPasswordValid) {
+            return res.status(401).send('Contraseña incorrecta');
+        }
+
+        const token = jwt.sign({ email: user.email, id: user.id }, process.env.JWT_SECRET, { expiresIn: '1h' });
+
+        res
+            .status(200)
+            .cookie('token', token, { httpOnly: true, secure: process.env.NODE_ENV === 'production' }) // 'secure' solo en producción
+            .send('User logged in');
     } catch (error) {
         res.status(500).send('Error en el login');
     }
@@ -44,7 +60,6 @@ const verifyToken = (req, res) => {
     try {
         const data = jwt.verify(token, process.env.JWT_SECRET);
         res.status(200).send('Token verificado correctamente');
-        console.log("Data", data);
     } catch (error) {
         res.status(403).send('Token inválido');
     }
