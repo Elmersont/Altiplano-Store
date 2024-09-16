@@ -3,18 +3,24 @@ import { Link, useNavigate } from 'react-router-dom';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
-import { useAuth } from '../context/AutentificacionContext';
+import { useAuth } from '../context/AutentificacionContext'; 
 import '../styles/NavbarAltiplano.css'; 
+ 
 
 const logoNavbar = '/assets/images/logoNavbar.png';
 
 function NavbarAltiplano() {
-  const { user, logout } = useAuth(); // Retira la función de login simulada
+  const { user, logout } = useAuth(); 
   const navigate = useNavigate(); // Hook para redireccionar
 
-  // Función para simular el inicio de sesión SACAR CUANDOO TENGAMOS EL FORMULARIO
+ 
   const handleLogin = () => {
-    navigate('/login'); // Redirige a la página de login
+    navigate('/login'); 
+  };
+
+ 
+  const handleProfile = () => {
+    navigate('/perfil'); 
   };
 
   return (
@@ -36,7 +42,7 @@ function NavbarAltiplano() {
               <span className="nav-text">Inicio</span>
               <button className="custom-button">Inicio</button>
             </Nav.Link>
-            <Nav.Link as={Link} to="/tienda" className="nav-item-hover">
+            <Nav.Link as={Link} to="/store" className="nav-item-hover">
               <span className="nav-text">Tienda</span>
               <button className="custom-button">Tienda</button>
             </Nav.Link>
@@ -44,6 +50,7 @@ function NavbarAltiplano() {
               <span className="nav-text">Conócenos</span>
               <button className="custom-button">Conócenos</button>
             </Nav.Link>
+            {/* Si el usuario es administrador, mostrar el botón de Admin */}
             {user?.role === 'admin' && (
               <button className="rol-button">Panel Admin</button>
             )}
@@ -54,12 +61,15 @@ function NavbarAltiplano() {
                 <span className="navbar-text me-3">
                   Bienvenido {user.name} 
                 </span>
+                <button className="profile-button" onClick={handleProfile}>
+                  Mi Perfil
+                </button>
                 <button className="cerrar-button" onClick={logout}>
                   Cerrar sesión
                 </button>
               </>
             ) : (
-             
+              /* Mostrar "Iniciar sesión" si no está autenticado */
               <button className="login-button" onClick={handleLogin}>
                 👤 Iniciar sesión
               </button>
