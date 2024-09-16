@@ -10,12 +10,12 @@ const home = (req, res) => {
 const register = async (req, res) => {
     try {
         const { nombre, email, password, telefono, region, ciudad, direccion } = req.body;
-        
-        // Encriptar la contraseña antes de almacenarla
         const hashedPassword = await bcrypt.hash(password, 10);
 
-        const result = await userModel.addUser({ nombre, email, password: hashedPassword, telefono, region, ciudad, direccion });
-        
+        const result = await userModel.addUser({
+            nombre, email, password: hashedPassword, telefono, region, ciudad, direccion
+        });
+
         if (result) {
             res.status(200).send('Usuario creado con éxito');
         } else {
@@ -35,7 +35,6 @@ const login = async (req, res) => {
             return res.status(401).send('Usuario no existe');
         }
 
-        // Comparar la contraseña encriptada con la proporcionada
         const isPasswordValid = await bcrypt.compare(password, user.password);
         if (!isPasswordValid) {
             return res.status(401).send('Contraseña incorrecta');
@@ -45,7 +44,7 @@ const login = async (req, res) => {
 
         res
             .status(200)
-            .cookie('token', token, { httpOnly: true, secure: process.env.NODE_ENV === 'production' }) // 'secure' solo en producción
+            .cookie('token', token, { httpOnly: true, secure: process.env.NODE_ENV === 'production' })
             .send('User logged in');
     } catch (error) {
         res.status(500).send('Error en el login');
@@ -58,7 +57,7 @@ const verifyToken = (req, res) => {
         return res.status(401).send('Acceso denegado');
     }
     try {
-        const data = jwt.verify(token, process.env.JWT_SECRET);
+        jwt.verify(token, process.env.JWT_SECRET);
         res.status(200).send('Token verificado correctamente');
     } catch (error) {
         res.status(403).send('Token inválido');
