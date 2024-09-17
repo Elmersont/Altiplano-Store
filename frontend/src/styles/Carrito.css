@@ -1,0 +1,70 @@
+.carrito-container {
+    width: 80%;
+    margin: 0 auto;
+  }
+  
+  .carrito-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+  }
+  
+  .carrito-table th, 
+  .carrito-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+  }
+  
+  .carrito-table th {
+    text-align: left;
+    background-color: #f4f4f4;
+  }
+  
+  .imagen-producto {
+    width: 50px;
+    height: 50px;
+    margin-right: 10px;
+    vertical-align: middle;
+  }
+  
+  .eliminar-producto {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 18px;
+  }
+  
+  .input-cupon {
+    width: 200px;
+    padding: 5px;
+    margin-right: 10px;
+  }
+  
+  .btn-aplicar-cupon {
+    padding: 5px 10px;
+    background-color: #333;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .carrito-totales {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .totales-carrito {
+    text-align: right;
+  }
+  
+  .btn-finalizar-compra {
+    background-color: #333;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    text-align: center;
+  }
+  

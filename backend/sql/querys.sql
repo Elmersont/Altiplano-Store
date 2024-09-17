@@ -14,5 +14,3 @@ CREATE TABLE IF NOT EXISTS usuarios(
     direccion VARCHAR(100) NOT NULL
 );
 
---\q
-

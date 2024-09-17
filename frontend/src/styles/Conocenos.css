@@ -1,6 +1,5 @@
-/* src/styles/Conocenos.css */
-.conocenos-container {
-    padding-top: 80px; /* Espacio para evitar superposición con la navbar fija */
+.margen {
+    padding-top: 150px!important; /* Espacio para evitar superposición con la navbar fija */
     padding-bottom: 50px;
   }
   

@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
+import { useAuth } from '../../context/AutentificacionContext'; 
 import styles from '../../styles/Usuarios.module.css';
 import MisFavoritos from './MisFavoritos'; 
 
 const PerfilUsuario = () => {
+  const { user } = useAuth(); // Obtenemos el estado de usuario desde el contexto
   const [currentSection, setCurrentSection] = useState('datosPersonales');
   const [showPasswordFields, setShowPasswordFields] = useState(false);
   const [userData, setUserData] = useState({

@@ -1,11 +1,11 @@
 // src/pages/Conocenos.jsx
 import React from 'react';
 import { Container, Row, Col, Card, Button } from 'react-bootstrap'; 
-import '../styles/Conocenos.css'; // Puedes agregar estilos adicionales si es necesario
+import '../styles/Conocenos.css';
 
 const Conocenos = () => {
   return (
-    <Container className="py-5 mt-5"> {/* Añade márgenes superiores para evitar la superposición con la navbar */}
+    <Container className="margen"> 
       <Row className="text-center mb-4">
         <Col>
           <h1 className="display-4">Conócenos</h1>
@@ -18,7 +18,7 @@ const Conocenos = () => {
         <Col md={6}>
           <Card className="border-0">
             <Card.Img 
-              src="/assets/images/nuestro-equipo.jpg" 
+              src="/assets/images/FOTO PERFIL.png" 
               alt="Nuestro Equipo" 
               className="rounded shadow-sm"
             />

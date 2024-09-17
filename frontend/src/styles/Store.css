@@ -1,5 +1,5 @@
 .store-container {
-    padding-top: 150px!important; /* Espacio para evitar superposición con la navbar fija */
+    padding-top:150px!important; 
     padding-bottom: 50px;
     display: flex;
     flex-direction: column;
@@ -14,14 +14,6 @@
     width: 100%;
     max-width: 1200px;
     margin: 20px auto;
-  }
-  
-  .product-card {
-    background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    overflow: hidden;
-    transition: transform 0.2s;
   }
   
   .product-card:hover {
