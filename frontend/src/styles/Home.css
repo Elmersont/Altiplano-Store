@@ -35,3 +35,7 @@
     background-color: #505050; 
     border-color: #505050;
   }
+
+.main-content{
+  padding: 25px !important;
+}

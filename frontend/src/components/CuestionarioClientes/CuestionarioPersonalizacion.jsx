@@ -43,23 +43,23 @@ const CuestionarioPersonalizacion = () => {
     alert("Por favor completa todas las opciones antes de continuar.");
   };
 
-  // Función para calcular el precio en base a las dimensiones seleccionadas
+  
   const calcularPrecio = () => {
     let precioBase;
     
-    // Definir el precio base según el ID del producto
+
     switch (id) {
       case '1':
-        precioBase = 189990; // Producto 1
+        precioBase = 189990; 
         break;
       case '2':
-        precioBase = 279390; // Producto 2
+        precioBase = 279390; 
         break;
       case '3':
-        precioBase = 303000; // Producto 3
+        precioBase = 303000; 
         break;
       default:
-        precioBase = 189990; // Precio base por defecto (puedes ajustarlo según lo que necesites)
+        precioBase = 189990; 
         break;
     }
 
@@ -118,8 +118,9 @@ const CuestionarioPersonalizacion = () => {
   };
 
   return (
+    <div className={styles.cuestionario}>
     <div className={styles.cuestionarioContainer}>
-      {/* Mostrar el precio actualizado */}
+ 
       <div className={styles.precioActual}>
         <h4>Precio actual: ${calcularPrecio().toLocaleString('es-CL')}</h4>
       </div>
@@ -291,6 +292,7 @@ const CuestionarioPersonalizacion = () => {
           </div>
         </>
       )}
+    </div>
     </div>
   );
 };
