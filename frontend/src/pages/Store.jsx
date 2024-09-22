@@ -27,7 +27,10 @@ const Store = () => {
           <div key={product.id} className="product-card">
             <Link to={`/product/${product.id}`}>
               <img src={product.imageUrl} alt={product.name} className="product-image" />
-              <h2>{product.name}</h2>
+              {/* Botón con el nombre ajustado al estilo oscuro */}
+              <h2 style={{ backgroundColor: '#282A2D', color: '#fff', padding: '10px 20px', borderRadius: '5px', display: 'inline-block', marginTop: '10px' }}>
+                {product.name}
+              </h2>
             </Link>
           </div>
         ))}

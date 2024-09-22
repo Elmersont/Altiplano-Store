@@ -7,7 +7,7 @@ import { useAuth } from '../context/AutentificacionContext';
 import '../styles/NavbarAltiplano.css'; 
  
 
-const logoNavbar = '/assets/images/logoNavbar.png';
+const logoNavbar = '/assets/logos/minimalista.png';
 
 function NavbarAltiplano() {
   const { user, logout } = useAuth(); 
