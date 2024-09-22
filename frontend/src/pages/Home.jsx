@@ -16,47 +16,62 @@ const products = [
     src: '/assets/carrusel/1 color/Clase 1 color/Clase 2.png',
     title: 'Lienzo Clásico',
     description: 'Diseño elegante que combina tradición y modernidad.',
+    category: 1, 
   },
   {
     src: '/assets/carrusel/1 color/Rupturista 1 color/Rupturista_3.png',
     title: 'Lienzo Rupturista',
     description: 'Innovador y atrevido, perfecto para espacios modernos.',
+    category: 1, 
   },
   {
     src: '/assets/carrusel/2 color/Clase 2 color/Clase2_2.png',
     title: 'Lienzo Doble Clase',
     description: 'Dos colores que destacan la distinción de tu espacio.',
+    category: 2, 
   },
   {
     src: '/assets/carrusel/2 color/Nativa 2 Color/Nativa2_1.png',
     title: 'Lienzo Nativo',
     description: 'Inspirado en la naturaleza, fusiona materiales nobles.',
+    category: 2, 
   },
   {
     src: '/assets/carrusel/2 color/Rústica 2 color/Rustica2_3.png',
     title: 'Lienzo Rústico Bicolor',
     description: 'Combinación de texturas y colores que capturan la esencia rural.',
+    category: 2, 
   },
   {
     src: '/assets/carrusel/3 colores/3colores_1.png',
     title: 'Lienzo Tricolor',
     description: 'Diseño que juega con tres tonalidades para un look audaz.',
+    category: 3, 
   },
   {
     src: '/assets/carrusel/3 colores/3colores_2.png',
     title: 'Lienzo Vanguardista',
     description: 'Un lienzo que se adelanta a su tiempo con un estilo único.',
+    category: 3, 
   },
 ];
 
 function Home() {
   const [activeIndex, setActiveIndex] = useState(0);
   const navigate = useNavigate();
-  const { user } = useAuth(); // estado de autenticación del usuario
+  const { user } = useAuth(); 
 
-  const handleButtonClick = () => {
+  const handlePersonalizaClick = () => {
     if (user) {
-      navigate('/cuestionario'); 
+      navigate('/store'); 
+    } else {
+      navigate('/login'); 
+    }
+  };
+
+  const handleVerPrecioClick = (category) => {
+    if (user) {
+      navigate(`/product/${category}`);
     } else {
       navigate('/login'); 
     }
@@ -92,7 +107,7 @@ function Home() {
               <p className="lead">
                 Cada puerta es un lienzo en blanco. Cada uno de nuestros lienzos busca representar la esencia de tus espacios y generar ese efecto "Woou".
               </p>
-              <Button variant="primary" size="lg" className="mt-3" onClick={handleButtonClick}>
+              <Button variant="primary" size="lg" className="mt-3" onClick={handlePersonalizaClick}>
                 Personaliza tu puerta aquí
               </Button>
             </Col>
@@ -144,7 +159,12 @@ function Home() {
                       <p style={{ marginBottom: '10px' }}>
                         <span style={{ fontWeight: 'bold' }}>Descripción:</span> {product.description}
                       </p>
-                      <Button variant="secondary">Ver precio</Button>
+                      <Button
+                        variant="secondary"
+                        onClick={() => handleVerPrecioClick(product.category)}
+                      >
+                        Ver precio
+                      </Button>
                     </div>
                   )}
                 </div>
