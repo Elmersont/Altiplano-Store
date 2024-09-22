@@ -24,6 +24,7 @@ const MisFavoritos = () => {
   };
 
   return (
+    <div className={styles.favoritoSection}>
     <div className={styles.section}>
       <h2>Mis Lienzos Favoritos</h2>
       {favoritos.length > 0 ? (
@@ -46,6 +47,7 @@ const MisFavoritos = () => {
       <button onClick={agregarNuevoLienzo} className={styles.addLienzoButton}>
         Agregar Nuevo Lienzo
       </button>
+    </div>
     </div>
   );
 };

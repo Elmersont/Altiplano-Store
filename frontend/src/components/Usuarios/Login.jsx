@@ -40,6 +40,7 @@ const Login = () => {
   };
 
   return (
+    <div className={styles.loginContainer}>
     <div className={styles.usuariosContainer}>
       <h2>Iniciar Sesión</h2>
       <form onSubmit={handleSubmit}>
@@ -84,6 +85,7 @@ const Login = () => {
           </button> 
         </Link>
       </div>
+    </div>
     </div>
   );
 };

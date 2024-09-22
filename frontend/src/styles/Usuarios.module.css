@@ -1,3 +1,22 @@
+.loginContainer{
+  padding-bottom: 40px !important;
+  margin-bottom: 20px !important;  
+}
+
+.registroContainer{
+  padding-bottom: 40px !important;
+  margin-bottom: 20px !important;  
+}
+
+.recuperarContainer{
+  padding-bottom: 40px !important;
+  margin-bottom: 100px !important;    
+}
+
+.favoritoSection{
+  padding: 150px 80px 160px 80px !important;    
+}
+
 .login-page {
   padding-top: 80px; 
 }

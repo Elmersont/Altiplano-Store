@@ -65,6 +65,7 @@ const Registro = () => {
   const passwordChecks = checkPasswordStrength();
 
   return (
+    <div className={styles.registroContainer}>
     <div className={styles.usuariosContainer}>
       <h2>Registro</h2>
       <form onSubmit={handleSubmit}>
@@ -86,6 +87,7 @@ const Registro = () => {
         <button type="submit" disabled={isLoading}>{isLoading ? 'Registrando...' : 'Registrar'}</button>
       </form>
       {mensaje && <p>{mensaje}</p>}
+    </div>
     </div>
   );
 };

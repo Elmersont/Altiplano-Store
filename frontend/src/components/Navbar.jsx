@@ -61,10 +61,10 @@ function NavbarAltiplano() {
                 <span className="navbar-text me-3">
                   Bienvenido {user.name} 
                 </span>
-                <button className="profile-button" onClick={handleProfile}>
+                <button className="profile-button mx-3" onClick={handleProfile}>
                   Mi Perfil
                 </button>
-                <button className="cerrar-button" onClick={logout}>
+                <button className="cerrar-button mx-3" onClick={logout}>
                   Cerrar sesión
                 </button>
               </>
