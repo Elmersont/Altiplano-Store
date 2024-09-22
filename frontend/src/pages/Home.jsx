@@ -56,7 +56,7 @@ function Home() {
 
   const handleButtonClick = () => {
     if (user) {
-      navigate('/store'); 
+      navigate('/cuestionario'); 
     } else {
       navigate('/login'); 
     }
