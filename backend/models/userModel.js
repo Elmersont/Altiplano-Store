@@ -21,7 +21,26 @@ const getUserByEmail = async (email) => {
     }
 };
 
+const updateUserProfile = async (userId, { nombre, email, telefono, region, ciudad, direccion }) => {
+    try {
+        const sql = `
+            UPDATE usuarios 
+            SET nombre = $1, email = $2, 
+                telefono = $3, region = $4, ciudad = $5, direccion = $6
+            WHERE id = $7
+            RETURNING *;
+        `;
+        const values = [nombre, email, telefono, region, ciudad, direccion, userId];
+        const result = await pool.query(sql, values);
+        return result.rowCount > 0 ? result.rows[0] : false;
+    } catch (error) {
+        console.log('Error actualizando el perfil del usuario:', error.message);
+        throw error;
+    }
+};
+
 export const userModel = {
     addUser,
-    getUserByEmail
+    getUserByEmail,
+    updateUserProfile
 };

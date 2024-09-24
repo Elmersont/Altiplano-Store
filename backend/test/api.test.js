@@ -62,7 +62,7 @@ describe('API Routes Testing', () => {
     
     expect(res.statusCode).toEqual(200);
     expect(res.text).toContain('Token verificado correctamente');
-  }, 10000);  
+  }, 10000);
 
   it('should return 404 for an unknown route', async () => {
     const res = await request(app).get('/unknown');

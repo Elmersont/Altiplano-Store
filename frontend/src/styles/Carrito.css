@@ -1,6 +1,7 @@
 .carrito-container {
     width: 80%;
     margin: 0 auto;
+    padding: 200px 30px 50px 30px !important;
   }
   
   .carrito-table {

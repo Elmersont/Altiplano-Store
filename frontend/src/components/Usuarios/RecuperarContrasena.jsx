@@ -24,6 +24,7 @@ const RecuperarContrasena = () => {
   };
 
   return (
+    <div className={styles.recuperarContainer}>
     <div className={styles.usuariosContainer}>
       <h2>Recuperar Contraseña</h2>
       <form onSubmit={handleSubmit}>
@@ -31,6 +32,7 @@ const RecuperarContrasena = () => {
         <button type="submit" disabled={isLoading}>{isLoading ? 'Cargando...' : 'Recuperar Contraseña'}</button>
       </form>
       {mensaje && <p>{mensaje}</p>}
+    </div>
     </div>
   );
 };
