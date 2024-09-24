@@ -7,9 +7,21 @@ import 'dotenv/config';
 const app = express();
 const PORT = process.env.PORT || 3001;
 
+const allowedOrigins = [
+    'http://localhost:5173', // Para desarrollo local
+    'https://altiplano-store.onrender.com' // URL de tu frontend en Render
+];
+
 app.use(cors({
-    origin: 'http://localhost:5173', 
-    credentials: true
+    origin: (origin, callback) => {
+        // Permite solicitudes sin origen (como en Postman) o solicitudes de los dominios permitidos
+        if (!origin || allowedOrigins.includes(origin)) {
+            callback(null, true);
+        } else {
+            callback(new Error('No permitido por CORS'));
+        }
+    },
+    credentials: true // Asegura que las cookies sean enviadas en las solicitudes
 }));
 
 app.use(express.json());

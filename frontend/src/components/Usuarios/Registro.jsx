@@ -41,7 +41,7 @@ const Registro = () => {
     console.log('Datos enviados al backend:', formData);
   
     try {
-      const response = await fetch('http://localhost:3001/register', {
+      const response = await fetch('https://altiplano-store-1.onrender.com/register', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

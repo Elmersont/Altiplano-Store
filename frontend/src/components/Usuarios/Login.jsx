@@ -18,12 +18,13 @@ const Login = () => {
 
     try {
       // Hacemos la solicitud de inicio de sesión al backend
-      const response = await fetch('http://localhost:3001/login', {
+      const response = await fetch('https://altiplano-store-1.onrender.com/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({ email: formData.email, password: formData.password }), // Asegúrate de que sea 'password'
+        credentials: 'include'
       });
 
       // Verificar si la respuesta es JSON

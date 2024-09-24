@@ -50,7 +50,7 @@ const PerfilUsuario = () => {
   const handlePasswordChange = async () => {
     if (userData.nuevaContrasena === userData.confirmarNuevaContrasena) {
       try {
-        const response = await fetch('http://localhost:3001/user/update-password', {
+        const response = await fetch('https://altiplano-store-1.onrender.com/user/update-password', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -96,7 +96,7 @@ const PerfilUsuario = () => {
 
   const handleSaveChanges = async () => {
     try {
-      const response = await fetch('http://localhost:3001/user/update-profile', {
+      const response = await fetch('https://altiplano-store-1.onrender.com/user/update-profile', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

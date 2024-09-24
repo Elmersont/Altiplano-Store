@@ -11,7 +11,7 @@ const MisFavoritos = () => {
   useEffect(() => {
     const obtenerFavoritos = async () => {
       try {
-        const response = await fetch('http://localhost:3001/favorites', { 
+        const response = await fetch('https://altiplano-store-1.onrender.com/favorites', { 
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
@@ -40,7 +40,7 @@ const MisFavoritos = () => {
 
   const eliminarFavorito = async (id) => {
     try {
-      const response = await fetch(`http://localhost:3001/favorites/${id}`, {
+      const response = await fetch(`https://altiplano-store-1.onrender.com/favorites/${id}`, {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',

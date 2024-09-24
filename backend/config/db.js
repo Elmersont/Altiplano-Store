@@ -10,7 +10,19 @@ const config = {
     user: DB_USER,
     password: DB_PASSWORD,
     database: DB_DATABASE,
+    ssl: {
+        rejectUnauthorized: false, 
+    },
     allowExitOnIdle: true
 };
 
 export const pool = new Pool(config);
+
+pool.connect()
+    .then(client => {
+        console.log("Conexión a la base de datos exitosa.");
+        client.release();
+    })
+    .catch(err => {
+        console.error("Error al conectar a la base de datos:", err);
+    });

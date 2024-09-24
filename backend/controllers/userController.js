@@ -3,6 +3,8 @@ import jwt from 'jsonwebtoken';
 import bcrypt from 'bcryptjs';
 import 'dotenv/config';
 
+const JWT_SECRET = process.env.JWT_SECRET || 'defaultSecret';
+
 const home = (req, res) => {
     res.send('Home Page');
 };
@@ -62,7 +64,13 @@ const register = async (req, res) => {
             return res.status(401).send('Contraseña incorrecta');
         }
 
-        const token = jwt.sign({ email: user.email, id: user.id }, process.env.JWT_SECRET, { expiresIn: '1h' });
+        const token = jwt.sign({ email: user.email, id: user.id }, JWT_SECRET, { expiresIn: '1h' });
+
+        const cookieOptions = {
+            httpOnly: true,
+            secure: process.env.NODE_ENV === 'production', // Solo cookies seguras en producción
+            sameSite: process.env.NODE_ENV === 'production' ? 'strict' : 'lax', // Manejo de cookies en entornos de desarrollo y producción
+        };
 
         res
             .status(200)
@@ -122,8 +130,6 @@ const updateProfile = async (req, res) => {
 
         const updatedUser = await userModel.updateUserProfile(userId, {
             nombre,
-            apellido,
-            nombreUsuario,
             email,
             telefono,
             region,
