@@ -37,7 +37,7 @@ const Login = () => {
 
       // Verificar si la autenticación fue exitosa
       if (response.ok && data.token) {
-        login(data.token); // Guardamos el token en el contexto de autenticación
+        login(data.token, data.user); // Guardamos el token en el contexto de autenticación
         navigate('/perfil'); // Redirigimos a la página de perfil
       } else {
         setMensaje(data || 'Error en la autenticación');

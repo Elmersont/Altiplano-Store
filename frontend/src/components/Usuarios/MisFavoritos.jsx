@@ -4,19 +4,60 @@ import styles from '../../styles/Usuarios.module.css';
 
 const MisFavoritos = () => {
   const [favoritos, setFavoritos] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState('');
   const navigate = useNavigate(); 
 
   useEffect(() => {
-    //  API para obtener los lienzos favoritos del usuario
-    const lienzosGuardados = [
-      { id: 1, nombre: 'Lienzo Clásico', categoria: 'Clásica' },
-      { id: 2, nombre: 'Lienzo Moderno', categoria: 'Rupturista' },
-    ];
-    setFavoritos(lienzosGuardados);
+    const obtenerFavoritos = async () => {
+      try {
+        const response = await fetch('http://localhost:3001/favorites', { 
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          credentials: 'include',
+        });
+
+        const data = await response.json();
+
+        if (response.ok) {
+          setFavoritos(data.favoritos);
+        } else {
+          setError(data.message || 'Error al cargar los favoritos.');
+        }
+      } catch (error) {
+        console.error('Error al obtener los favoritos:', error);
+        setError('Error al cargar los favoritos.');
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    obtenerFavoritos();
   }, []);
 
-  const eliminarFavorito = (id) => {
-    setFavoritos(favoritos.filter(favorito => favorito.id !== id));
+
+  const eliminarFavorito = async (id) => {
+    try {
+      const response = await fetch(`http://localhost:3001/favorites/${id}`, {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        credentials: 'include',
+      });
+
+      if (response.ok) {
+        setFavoritos(favoritos.filter(favorito => favorito.id !== id));
+      } else {
+        const data = await response.json();
+        setError(data.message || 'Error al eliminar el favorito.');
+      }
+    } catch (error) {
+      console.error('Error al eliminar el favorito:', error);
+      setError('Error al eliminar el favorito.');
+    }
   };
 
   const agregarNuevoLienzo = () => {
@@ -26,8 +67,13 @@ const MisFavoritos = () => {
   return (
     <div className={styles.favoritoSection}>
     <div className={styles.section}>
-      <h2>Mis Lienzos Favoritos</h2>
-      {favoritos.length > 0 ? (
+    <h2>Mis Lienzos Favoritos</h2>
+      {isLoading ? (
+        <p>Cargando favoritos...</p>
+      ) : error ? (
+        <p>{error}</p>
+      ) : 
+      favoritos.length > 0 ? (
         <ul className={styles.favoritosList}>
           {favoritos.map(favorito => (
             <li key={favorito.id} className={styles.favoritoItem}>

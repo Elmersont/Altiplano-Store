@@ -10,6 +10,10 @@ router.post('/login', userController.login);
 
 
 router.get('/protected', autentificaciónMiddleware, userController.verifyToken);
+router.get('/favorites', autentificaciónMiddleware, userController.getFavorites);
+router.delete('/favorites/:id', autentificaciónMiddleware, userController.deleteFavorite); 
+
+router.post('/user/update-profile', autentificaciónMiddleware, userController.updateProfile);
 
 router.all('*', userController.notFound);
 

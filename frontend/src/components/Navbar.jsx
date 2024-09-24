@@ -5,20 +5,17 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import { useAuth } from '../context/AutentificacionContext'; 
 import '../styles/NavbarAltiplano.css'; 
- 
 
 const logoNavbar = '/assets/images/logoNavbar.png';
 
 function NavbarAltiplano() {
-  const { user, logout } = useAuth(); 
-  const navigate = useNavigate(); // Hook para redireccionar
+  const { user, logout, loading } = useAuth(); // Ahora se tiene acceso al estado de carga
+  const navigate = useNavigate();
 
- 
   const handleLogin = () => {
     navigate('/login'); 
   };
 
- 
   const handleProfile = () => {
     navigate('/perfil'); 
   };
@@ -50,13 +47,14 @@ function NavbarAltiplano() {
               <span className="nav-text">Conócenos</span>
               <button className="custom-button">Conócenos</button>
             </Nav.Link>
-            {/* Si el usuario es administrador, mostrar el botón de Admin */}
             {user?.role === 'admin' && (
               <button className="rol-button">Panel Admin</button>
             )}
           </Nav>
           <Nav>
-            {user ? (
+            {loading ? (
+              <span className="navbar-text me-3">Cargando...</span>
+            ) : user ? (
               <>
                 <span className="navbar-text me-3">
                   Bienvenido {user.name} 
@@ -69,7 +67,6 @@ function NavbarAltiplano() {
                 </button>
               </>
             ) : (
-              /* Mostrar "Iniciar sesión" si no está autenticado */
               <button className="login-button" onClick={handleLogin}>
                 👤 Iniciar sesión
               </button>

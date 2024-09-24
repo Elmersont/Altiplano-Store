@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useAuth } from '../../context/AutentificacionContext'; 
 import styles from '../../styles/Usuarios.module.css';
 import MisFavoritos from './MisFavoritos'; 
@@ -8,17 +8,31 @@ const PerfilUsuario = () => {
   const [currentSection, setCurrentSection] = useState('datosPersonales');
   const [showPasswordFields, setShowPasswordFields] = useState(false);
   const [userData, setUserData] = useState({
-    nombre: 'Juan',
-    apellido: 'Perez',
-    nombreUsuario: 'Juanca',
-    email: 'juan@example.com',
-    whatsappCodigo: '+56',
-    whatsappNumero: '',
+    nombre: '',
+    email: '',
+    telefono: '',
+    region: '',
+    ciudad: '',
+    direccion: '',
     fotoPerfil: null,
     contrasenaActual: '',
     nuevaContrasena: '',
     confirmarNuevaContrasena: '',
   });
+
+  useEffect(() => {
+    if (user) {
+      setUserData({
+        nombre: user.nombre || '',
+        email: user.email || '',
+        telefono: user.telefono || '',
+        region: user.region || '',
+        ciudad: user.ciudad || '',
+        direccion: user.direccion || '',
+        fotoPerfil: user.fotoPerfil || null,
+      });
+    }
+  }, [user]);
 
   const handleSectionChange = (section) => {
     setCurrentSection(section);
@@ -33,10 +47,31 @@ const PerfilUsuario = () => {
     setUserData({ ...userData, fotoPerfil: URL.createObjectURL(e.target.files[0]) });
   };
 
-  const handlePasswordChange = () => {
+  const handlePasswordChange = async () => {
     if (userData.nuevaContrasena === userData.confirmarNuevaContrasena) {
-      // backend
-      alert('Contraseña actualizada con éxito.');
+      try {
+        const response = await fetch('http://localhost:3001/user/update-password', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            currentPassword: userData.contrasenaActual || '',
+            newPassword: userData.nuevaContrasena || '',
+          }),
+        });
+
+        const data = await response.json();
+
+        if (response.ok) {
+          alert('Contraseña actualizada con éxito.');
+        } else {
+          alert(data.message || 'Error al actualizar la contraseña.');
+        }
+      } catch (error) {
+        console.error('Error al actualizar la contraseña:', error);
+        alert('Error en la solicitud. Intenta de nuevo más tarde.');
+      }
     } else {
       alert('Las contraseñas no coinciden.');
     }
@@ -47,20 +82,46 @@ const PerfilUsuario = () => {
   };
 
   const checkPasswordStrength = () => {
+    const nuevaContrasena = userData.nuevaContrasena || '';
     const checks = {
-      length: userData.nuevaContrasena.length >= 6,
-      number: /[0-9]/.test(userData.nuevaContrasena),
-      uppercase: /[A-Z]/.test(userData.nuevaContrasena),
-      lowercase: /[a-z]/.test(userData.nuevaContrasena)
+      length: nuevaContrasena.length >= 6,
+      number: /[0-9]/.test(nuevaContrasena),
+      uppercase: /[A-Z]/.test(nuevaContrasena),
+      lowercase: /[a-z]/.test(nuevaContrasena)
     };
     return checks;
   };
 
   const passwordChecks = checkPasswordStrength();
 
-  const handleSaveChanges = () => {
-    // backend
-    alert('Cambios guardados con éxito.');
+  const handleSaveChanges = async () => {
+    try {
+      const response = await fetch('http://localhost:3001/user/update-profile', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          nombre: userData.nombre,
+          email: userData.email,
+          telefono: userData.telefono,
+          region: userData.region,
+          ciudad: userData.ciudad,
+          direccion: userData.direccion,
+        }),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        alert('Cambios guardados con éxito.');
+      } else {
+        alert(data.message || 'Error al guardar los cambios.');
+      }
+    } catch (error) {
+      console.error('Error al guardar los cambios:', error);
+      alert('Error en la solicitud. Intenta de nuevo más tarde.');
+    }
   };
 
   return (
@@ -80,7 +141,7 @@ const PerfilUsuario = () => {
           className={styles.fileInput} 
           style={{ display: 'none' }} 
         />
-        <h3>{userData.nombreUsuario}</h3>
+        <h3>{userData.nombre}</h3>
       </div>
 
       <div className={styles.navLateral}>
@@ -101,38 +162,25 @@ const PerfilUsuario = () => {
               <input type="text" name="nombre" value={userData.nombre} onChange={handleInputChange} />
             </div>
             <div className={styles.formGroup}>
-              <label>Apellido:</label>
-              <input type="text" name="apellido" value={userData.apellido} onChange={handleInputChange} />
-            </div>
-            <div className={styles.formGroup}>
               <label>Correo Electrónico:</label>
               <input type="email" name="email" value={userData.email} onChange={handleInputChange} />
             </div>
             <div className={styles.formGroup}>
-              <label>¿Cómo prefieres que te digan?</label>
-              <input type="text" name="nombreUsuario" value={userData.nombreUsuario} onChange={handleInputChange} />
+              <label>Teléfono:</label>
+              <input type="text" name="telefono" value={userData.telefono} onChange={handleInputChange} />
             </div>
             <div className={styles.formGroup}>
-              <label>WhatsApp:</label>
-              <div className={styles.whatsappContainer}>
-                <input 
-                  type="text" 
-                  name="whatsappCodigo" 
-                  value={userData.whatsappCodigo} 
-                  onChange={handleInputChange}
-                  disabled
-                  className={styles.whatsappCodeInput}
-                />
-                <input 
-                  type="text" 
-                  name="whatsappNumero" 
-                  value={userData.whatsappNumero} 
-                  onChange={handleInputChange}
-                  className={styles.whatsappNumberInput}
-                />
-              </div>
+              <label>Región:</label>
+              <input type="text" name="region" value={userData.region} onChange={handleInputChange} />
             </div>
-
+            <div className={styles.formGroup}>
+              <label>Ciudad:</label>
+              <input type="text" name="ciudad" value={userData.ciudad} onChange={handleInputChange} />
+            </div>
+            <div className={styles.formGroup}>
+              <label>Dirección:</label>
+              <input type="text" name="direccion" value={userData.direccion} onChange={handleInputChange} />
+            </div>
             <button onClick={toggleShowPasswordFields} className={styles.navButton}>Cambiar Contraseña</button>
             {showPasswordFields && (
               <>
@@ -150,7 +198,7 @@ const PerfilUsuario = () => {
                   <input 
                     type="password" 
                     name="nuevaContrasena" 
-                    value={userData.nuevaContrasena} 
+                    value={userData.nuevaContrasena || ''} 
                     onChange={handleInputChange} 
                   />
                 </div>
@@ -159,7 +207,7 @@ const PerfilUsuario = () => {
                   <input 
                     type="password" 
                     name="confirmarNuevaContrasena" 
-                    value={userData.confirmarNuevaContrasena} 
+                    value={userData.confirmarNuevaContrasena || ''} 
                     onChange={handleInputChange} 
                   />
                 </div>

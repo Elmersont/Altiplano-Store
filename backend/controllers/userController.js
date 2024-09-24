@@ -67,7 +67,17 @@ const register = async (req, res) => {
         res
             .status(200)
             .cookie('token', token, { httpOnly: true, secure: process.env.NODE_ENV === 'production' })
-            .send({ message: 'User logged in', token });
+            .send({ message: 'User logged in',
+                    user: {
+                        id: user.id,
+                        nombre: user.nombre,
+                        email: user.email,
+                        telefono: user.telefono || '', // Datos opcionales
+                        region: user.region || '',
+                        ciudad: user.ciudad || '',
+                        direccion: user.direccion || '',
+                    },        
+                    token });
     } catch (error) {
         console.error('Error en el login:', error); // Muestra cualquier error
         res.status(500).send('Error en el login');
@@ -87,6 +97,80 @@ const verifyToken = (req, res) => {
     }
 };
 
+const validateToken = (req, res) => {
+    const token = req.cookies.token || req.headers.authorization?.split(' ')[1];
+    if (!token) {
+        return res.status(401).send('Token no proporcionado');
+    }
+
+    try {
+        const decoded = jwt.verify(token, process.env.JWT_SECRET);
+        res.status(200).json({ email: decoded.email });
+    } catch (error) {
+        res.status(403).send('Token inválido');
+    }
+};
+
+const updateProfile = async (req, res) => {
+    try {
+        const userId = req.user.id;
+        const { nombre, email, telefono, region, ciudad, direccion } = req.body;
+
+        if (!nombre || !email) {
+            return res.status(400).send('Nombre y correo electrónico son obligatorios.');
+        }
+
+        const updatedUser = await userModel.updateUserProfile(userId, {
+            nombre,
+            apellido,
+            nombreUsuario,
+            email,
+            telefono,
+            region,
+            ciudad,
+            direccion,
+        });
+
+        if (updatedUser) {
+            res.status(200).send('Perfil actualizado con éxito.');
+        } else {
+            res.status(400).send('Error al actualizar el perfil.');
+        }
+    } catch (error) {
+        console.error('Error al actualizar el perfil:', error.message);
+        res.status(500).send('Error en el servidor. Intenta más tarde.');
+    }
+};
+
+const getFavorites = async (req, res) => {
+    try {
+        const userId = req.user.id;
+        const favorites = await userModel.getFavorites(userId);
+
+        res.status(200).json({ favoritos: favorites });
+    } catch (error) {
+        res.status(500).send('Error al obtener los favoritos');
+    }
+};
+
+// Controlador para eliminar un favorito
+const deleteFavorite = async (req, res) => {
+    try {
+        const userId = req.user.id;
+        const favoriteId = req.params.id;
+        const result = await userModel.deleteFavorite(userId, favoriteId);
+
+        if (result) {
+            res.status(200).send('Favorito eliminado con éxito');
+        } else {
+            res.status(400).send('Error al eliminar el favorito');
+        }
+    } catch (error) {
+        res.status(500).send('Error al eliminar el favorito');
+    }
+};
+
+
 const notFound = (req, res) => {
     res.status(404).send('404 - Page not found');
 };
@@ -96,5 +180,9 @@ export const userController = {
     register,
     login,
     verifyToken,
-    notFound
+    validateToken,
+    getFavorites,
+    deleteFavorite,
+    updateProfile,
+    notFound,
 };
