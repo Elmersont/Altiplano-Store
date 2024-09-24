@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom'; 
+import { Link, useNavigate } from 'react-router-dom';
 import styles from '../../styles/Usuarios.module.css';
-import { useAuth } from '../../context/AutentificacionContext'; 
+import { useAuth } from '../../context/AutentificacionContext';
 
 const Login = () => {
   const [formData, setFormData] = useState({ email: '', contrasena: '' });
   const [mensaje, setMensaje] = useState('');
-  const { login } = useAuth(); 
+  const { login } = useAuth(); // Asegúrate de importar correctamente login
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -15,23 +15,31 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
+
     try {
-      // Hacemos la solicitud de inicio de sesión al backend
       const response = await fetch('http://localhost:3001/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({ email: formData.email, password: formData.contrasena }),
+        credentials: 'include',
       });
 
-      const data = await response.json();
+      let data;
+      try {
+        data = await response.json();
+      } catch (err) {
+        console.error('No se pudo parsear la respuesta JSON:', err);
+        setMensaje('Error en la respuesta del servidor.');
+        return;
+      }
+
       if (response.ok && data.token) {
-        login(data.token); // Guardamos el token en el contexto de autenticación
-        navigate('/perfil'); // Redirigimos a la página de perfil
+        login(data.token, data.user); // Pasa el token y los datos del usuario al iniciar sesión
+        navigate('/perfil');
       } else {
-        setMensaje('Error en la autenticación');
+        setMensaje(data.message || 'Error en la autenticación');
       }
     } catch (error) {
       console.error('Error en la autenticación:', error);
@@ -62,7 +70,7 @@ const Login = () => {
         <button type="submit">Iniciar Sesión</button>
       </form>
       {mensaje && <p>{mensaje}</p>}
-      
+
       <div className={styles.passwordForgotten}>
         <Link to="/recuperar-contrasena">¿Olvidaste tu contraseña?</Link>
       </div>
@@ -71,17 +79,17 @@ const Login = () => {
 
       <div>
         <Link to="/registro">
-          <button 
-            style={{ 
-              backgroundColor: '#c6bfab', 
-              color: '#FFFFFF', 
-              border: 'none', 
-              padding: '10px 20px', 
-              cursor: 'pointer', 
-              borderRadius: '4px' 
+          <button
+            style={{
+              backgroundColor: '#c6bfab',
+              color: '#FFFFFF',
+              border: 'none',
+              padding: '10px 20px',
+              cursor: 'pointer',
+              borderRadius: '4px'
             }}>
             Registrarse
-          </button> 
+          </button>
         </Link>
       </div>
     </div>

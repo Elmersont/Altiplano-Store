@@ -1,34 +1,32 @@
-import React from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import Home from './pages/Home';
-import Store from './pages/Store';
-import ProductDetail from './pages/ProductDetail';
-import Login from './components/Usuarios/Login';
-import { AuthProvider } from './context/AutentificacionContext';
-import ProtectedRoute from './components/ProtectedRoute';
+import React, { useState, useEffect } from 'react';
+import { Navigate, Outlet } from 'react-router-dom';
+import { useAuth } from './AutentificacionContext'; 
+import PropTypes from 'prop-types'; 
 
-function App() {
-  return (
-    <AuthProvider>
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/login" element={<Login />} />
-          {/* Rutas protegidas */}
-          <Route path="/store" element={
-            <ProtectedRoute>
-              <Store />
-            </ProtectedRoute>
-          } />
-          <Route path="/product/:id" element={
-            <ProtectedRoute>
-              <ProductDetail />
-            </ProtectedRoute>
-          } />
-        </Routes>
-      </BrowserRouter>
-    </AuthProvider>
-  );
-}
+const ProtectedRoute = ({ children, redirectTo = '/login' }) => { 
+  const { user } = useAuth();
+  const [isLoading, setIsLoading] = useState(true);
 
-export default App;
+  useEffect(() => {
+    if (user !== null) {
+      setIsLoading(false);
+    }
+  }, [user]);
+
+  if (isLoading) {
+    return <p>Cargando...</p>;
+  }
+
+  if (!user) {
+    return <Navigate to={redirectTo} replace />;
+  }
+
+  return children ? children : <Outlet />;
+};
+
+ProtectedRoute.propTypes = {
+  children: PropTypes.node,
+  redirectTo: PropTypes.string,
+};
+
+export default ProtectedRoute;

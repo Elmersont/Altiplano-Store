@@ -1,17 +1,21 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useAuth } from '../../context/AutentificacionContext'; 
 import styles from '../../styles/Usuarios.module.css';
 import MisFavoritos from './MisFavoritos'; 
 
 const PerfilUsuario = () => {
-  const { user } = useAuth(); // Obtenemos el estado de usuario desde el contexto
+  const { user } = useAuth(); 
   const [currentSection, setCurrentSection] = useState('datosPersonales');
   const [showPasswordFields, setShowPasswordFields] = useState(false);
   const [userData, setUserData] = useState({
-    nombre: 'Juan',
-    apellido: 'Perez',
-    nombreUsuario: 'Juanca',
-    email: 'juan@example.com',
+    nombre: '',
+    apellido: '',
+    nombreUsuario: '',
+    email: '',
+    telefono: '',
+    region: '',
+    ciudad: '',
+    direccion: '',
     whatsappCodigo: '+56',
     whatsappNumero: '',
     fotoPerfil: null,
@@ -19,6 +23,23 @@ const PerfilUsuario = () => {
     nuevaContrasena: '',
     confirmarNuevaContrasena: '',
   });
+
+  useEffect(() => {
+    if (user) {
+      setUserData({
+        nombre: user.nombre || '',
+        apellido: user.apellido || '',
+        nombreUsuario: user.nombreUsuario || user.nombre || '',
+        email: user.email || '',
+        telefono: user.telefono || '',
+        region: user.region || '',
+        ciudad: user.ciudad || '',
+        direccion: user.direccion || '',
+        whatsappNumero: user.whatsappNumero || '',
+        fotoPerfil: user.fotoPerfil || null,
+      });
+    }
+  }, [user]);
 
   const handleSectionChange = (section) => {
     setCurrentSection(section);
@@ -33,10 +54,31 @@ const PerfilUsuario = () => {
     setUserData({ ...userData, fotoPerfil: URL.createObjectURL(e.target.files[0]) });
   };
 
-  const handlePasswordChange = () => {
+  const handlePasswordChange = async () => {
     if (userData.nuevaContrasena === userData.confirmarNuevaContrasena) {
-      // backend
-      alert('Contraseña actualizada con éxito.');
+      try {
+        const response = await fetch('http://localhost:3001/user/update-password', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            currentPassword: userData.contrasenaActual || '',
+            newPassword: userData.nuevaContrasena || '',
+          }),
+        });
+
+        const data = await response.json();
+
+        if (response.ok) {
+          alert('Contraseña actualizada con éxito.');
+        } else {
+          alert(data.message || 'Error al actualizar la contraseña.');
+        }
+      } catch (error) {
+        console.error('Error al actualizar la contraseña:', error);
+        alert('Error en la solicitud. Intenta de nuevo más tarde.');
+      }
     } else {
       alert('Las contraseñas no coinciden.');
     }
@@ -48,19 +90,47 @@ const PerfilUsuario = () => {
 
   const checkPasswordStrength = () => {
     const checks = {
-      length: userData.nuevaContrasena.length >= 6,
-      number: /[0-9]/.test(userData.nuevaContrasena),
-      uppercase: /[A-Z]/.test(userData.nuevaContrasena),
-      lowercase: /[a-z]/.test(userData.nuevaContrasena)
+      length: userData.nuevaContrasena ? userData.nuevaContrasena.length >= 6 : false,
+      number: /[0-9]/.test(userData.nuevaContrasena || ''),
+      uppercase: /[A-Z]/.test(userData.nuevaContrasena || ''),
+      lowercase: /[a-z]/.test(userData.nuevaContrasena || ''),
     };
     return checks;
   };
 
   const passwordChecks = checkPasswordStrength();
 
-  const handleSaveChanges = () => {
-    // backend
-    alert('Cambios guardados con éxito.');
+  const handleSaveChanges = async () => {
+    try {
+      const response = await fetch('http://localhost:3001/user/update-profile', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          nombre: userData.nombre,
+          apellido: userData.apellido,
+          nombreUsuario: userData.nombreUsuario,
+          email: userData.email,
+          telefono: userData.telefono,
+          region: userData.region,
+          ciudad: userData.ciudad,
+          direccion: userData.direccion,
+          whatsappNumero: userData.whatsappNumero,
+        }),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        alert('Cambios guardados con éxito.');
+      } else {
+        alert(data.message || 'Error al guardar los cambios.');
+      }
+    } catch (error) {
+      console.error('Error al guardar los cambios:', error);
+      alert('Error en la solicitud. Intenta de nuevo más tarde.');
+    }
   };
 
   return (
@@ -113,6 +183,22 @@ const PerfilUsuario = () => {
               <input type="text" name="nombreUsuario" value={userData.nombreUsuario} onChange={handleInputChange} />
             </div>
             <div className={styles.formGroup}>
+              <label>Teléfono:</label>
+              <input type="text" name="telefono" value={userData.telefono} onChange={handleInputChange} />
+            </div>
+            <div className={styles.formGroup}>
+              <label>Región:</label>
+              <input type="text" name="region" value={userData.region} onChange={handleInputChange} />
+            </div>
+            <div className={styles.formGroup}>
+              <label>Ciudad:</label>
+              <input type="text" name="ciudad" value={userData.ciudad} onChange={handleInputChange} />
+            </div>
+            <div className={styles.formGroup}>
+              <label>Dirección:</label>
+              <input type="text" name="direccion" value={userData.direccion} onChange={handleInputChange} />
+            </div>
+            <div className={styles.formGroup}>
               <label>WhatsApp:</label>
               <div className={styles.whatsappContainer}>
                 <input 
@@ -150,7 +236,7 @@ const PerfilUsuario = () => {
                   <input 
                     type="password" 
                     name="nuevaContrasena" 
-                    value={userData.nuevaContrasena} 
+                    value={userData.nuevaContrasena || ''} 
                     onChange={handleInputChange} 
                   />
                 </div>
@@ -159,7 +245,7 @@ const PerfilUsuario = () => {
                   <input 
                     type="password" 
                     name="confirmarNuevaContrasena" 
-                    value={userData.confirmarNuevaContrasena} 
+                    value={userData.confirmarNuevaContrasena || ''} 
                     onChange={handleInputChange} 
                   />
                 </div>
