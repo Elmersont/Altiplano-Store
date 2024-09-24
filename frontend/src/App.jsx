@@ -11,6 +11,7 @@ import MisFavoritos from './components/Usuarios/MisFavoritos.jsx';
 import Store from './pages/Store';
 import ProductDetail from './pages/ProductDetail';
 import NavbarAltiplano from './components/Navbar.jsx';
+import FooterAltiplano from './components/Footer.jsx';
 import Conocenos from './pages/Conocenos';
 import Carrito from './components/CarritoCompras/Carrito'; 
 import { AuthProvider } from './context/AutentificacionContext.jsx';
@@ -55,6 +56,7 @@ function App() {
           } />
           <Route path="*" element={<h1>Vista no existente</h1>} />
         </Routes>
+        <FooterAltiplano />
       </BrowserRouter>
     </AuthProvider>
   );
