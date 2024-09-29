@@ -42,24 +42,26 @@ function Home() {
         </Container>
       </section>
 
-      <div className="main-content">
-        <h2>Nuestros Productos</h2>
-        <div className="products-grid">
-        {products.map(product => (
-          <div key={product.id} className="product-card">
-            <Link to={`/product/${product.id}`}>
-              <img src={product.imageUrl} alt={product.name} className="product-image" />
-              <h2>{product.name}</h2>
-            </Link>
-          </div>
-        ))}
-      </div>
+      <Container className="main-content">
+        <h2 className="mt-3 mb-5">Nuestros Productos</h2>
+        <Row className="justify-content-evenly products-grid">
+          {products.map(product => (
+            <Col key={product.id} xs={12} sm={4} md={3} className="mb-4">
+              <div className="product-card">
+                <Link to={`/product/${product.id}`} className="product-link">
+                  <img src={product.imageUrl} alt={product.name} className="product-image" />
+                  <h2>{product.name}</h2>
+                </Link>
+              </div>
+            </Col>
+          ))}
+        </Row>
         <div className="view-more text-center mt-4">
           <Button variant="dark" size="lg" onClick={() => navigate('/store')}>
             Ver más productos
           </Button>
         </div>
-      </div>
+      </Container>
     </>
   );
 }

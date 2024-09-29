@@ -10,11 +10,14 @@ const config = {
     user: DB_USER,
     password: DB_PASSWORD,
     database: DB_DATABASE,
-    ssl: {
-        rejectUnauthorized: false, 
-    },
-    allowExitOnIdle: true
+    allowExitOnIdle: true,
+
+    ssl: process.env.NODE_ENV === 'production' 
+    ? { rejectUnauthorized: false }  // Habilitar SSL en producción (por ejemplo, Render)
+    : false  // Desactivar SSL en desarrollo local
 };
+    
+
 
 export const pool = new Pool(config);
 

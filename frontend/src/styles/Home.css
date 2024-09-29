@@ -39,3 +39,29 @@
 .main-content{
   padding: 25px !important;
 }
+
+.product-link {
+  text-decoration: none; 
+  color: inherit; /* Mantiene el color del texto por defecto o puedes establecer un color personalizado */
+  transition: color 0.3s ease;
+}
+
+
+.product-link:hover {
+  color: #282A2D; 
+  transform: scale(1.05);
+}
+
+.product-card {
+  transition: transform 0.3s ease; /* Transición suave para la animación */
+}
+
+.product-image{
+  border-radius: 100%;
+  margin-bottom: 25px;
+}
+
+.product-image:hover {
+  transform: scale(1.05); /* Zoom en la tarjeta cuando se hace hover */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra al hacer hover */
+}
