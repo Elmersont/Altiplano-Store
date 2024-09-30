@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Container, Row, Col, Button } from 'react-bootstrap'; 
 import { useNavigate, Link } from 'react-router-dom';
 import NavbarAltiplano from '../components/Navbar';
+import FooterAltiplano  from '../components/Footer';
 import '../styles/Home.css';
 
 function Home() {
@@ -64,6 +65,7 @@ function Home() {
           </Button>
         </div>
       </Container>
+      <FooterAltiplano />
     </>
   );
 }

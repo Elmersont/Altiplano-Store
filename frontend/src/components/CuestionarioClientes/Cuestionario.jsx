@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import NavbarAltiplano from '../Navbar';
+import FooterAltiplano from '../Footer';
 import styles from '../../styles/Cuestionario.module.css';
 
 const Cuestionario = () => {
@@ -141,6 +142,7 @@ const Cuestionario = () => {
         <button className={styles.navButton} onClick={handleGoToProduct}>Ir a ver lienzos</button>
       )}
     </div>
+    <FooterAltiplano />
 </>
   );
 };

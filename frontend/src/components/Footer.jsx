@@ -23,7 +23,7 @@ function FooterAltiplano() {
                 <Link to="/" className="text-light text-decoration-none">Inicio</Link>
               </li>
               <li>
-                <Link to="/tienda" className="text-light text-decoration-none">Tienda</Link>
+                <Link to="/store" className="text-light text-decoration-none">Tienda</Link>
               </li>
               <li>
                 <Link to="/conocenos" className="text-light text-decoration-none">Conócenos</Link>

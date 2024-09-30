@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import NavbarAltiplano from '../Navbar';
+import FooterAltiplano from '../Footer';
 import styles from '../../styles/Usuarios.module.css';
 
 const RecuperarContrasena = () => {
@@ -25,6 +26,7 @@ const RecuperarContrasena = () => {
   };
 
   return (
+    <>
     <div className={styles.recuperarContainer}>
     <NavbarAltiplano />
     <div className={styles.usuariosContainer}>
@@ -36,6 +38,8 @@ const RecuperarContrasena = () => {
       {mensaje && <p>{mensaje}</p>}
     </div>
     </div>
+    <FooterAltiplano />
+    </>
   );
 };
 

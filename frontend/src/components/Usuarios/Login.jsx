@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom'; 
 import NavbarAltiplano from '../Navbar';
+import FooterAltiplano from '../Footer';
 import styles from '../../styles/Usuarios.module.css';
 import { useAuth } from '../../context/AutentificacionContext'; 
 
@@ -51,6 +52,7 @@ const Login = () => {
   };
 
   return (
+    <>
     <div className={styles.loginContainer}>
       <NavbarAltiplano />
       <div className={styles.usuariosContainer}>
@@ -99,6 +101,8 @@ const Login = () => {
         </div>
       </div>
     </div>
+    <FooterAltiplano />
+    </>
   );
 };
 

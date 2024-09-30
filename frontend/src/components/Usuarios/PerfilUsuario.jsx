@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import NavbarAltiplano from '../Navbar';
+import FooterAltiplano from '../Footer';
 import { useAuth } from '../../context/AutentificacionContext'; 
 import styles from '../../styles/Usuarios.module.css';
 import MisFavoritos from './MisFavoritos'; 
@@ -126,6 +127,7 @@ const PerfilUsuario = () => {
   };
 
   return (
+    <>
     <div className={styles.perfilUsuarioContainer}>
       <NavbarAltiplano />
       <div className={styles.profileHeader}>
@@ -240,6 +242,8 @@ const PerfilUsuario = () => {
         )}
       </div>
     </div>
+    <FooterAltiplano />
+    </>
   );
 };
 

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import NavbarAltiplano from '../Navbar';
+import FooterAltiplano from '../Footer';
 import { useParams } from 'react-router-dom';
 
 const ProductDetails = () => {
@@ -38,6 +39,7 @@ const ProductDetails = () => {
   }
 
   return (
+    <>
     <div className='details'>
       <NavbarAltiplano />
         <div className="product-card">
@@ -51,6 +53,8 @@ const ProductDetails = () => {
             </div>
         </div>
     </div>
+    <FooterAltiplano />
+    </>
   );
 };
 

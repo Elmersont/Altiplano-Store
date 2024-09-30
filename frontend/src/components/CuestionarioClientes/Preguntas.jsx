@@ -1,5 +1,6 @@
 import React from 'react';
 import NavbarAltiplano from '../Navbar';
+import FooterAltiplano from '../Footer';
 
 const Preguntas = ({ question, options, onAnswer }) => {
   return (
@@ -11,6 +12,7 @@ const Preguntas = ({ question, options, onAnswer }) => {
           {option}
         </button>
       ))}
+      <FooterAltiplano />
     </div>
   );
 };

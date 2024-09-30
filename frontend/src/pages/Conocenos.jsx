@@ -2,10 +2,12 @@
 import React from 'react';
 import { Container, Row, Col, Card, Button } from 'react-bootstrap'; 
 import NavbarAltiplano from '../components/Navbar';
+import FooterAltiplano from '../components/Footer';
 import '../styles/Conocenos.css';
 
 const Conocenos = () => {
   return (
+    <>
     <Container className="margen"> 
       <NavbarAltiplano />
       <Row className="text-center mb-4">
@@ -43,6 +45,8 @@ const Conocenos = () => {
         </Col>
       </Row>
     </Container>
+    <FooterAltiplano />
+    </>
   );
 };
 

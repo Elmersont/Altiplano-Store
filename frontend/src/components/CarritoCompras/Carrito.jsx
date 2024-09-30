@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import NavbarAltiplano from '../Navbar';
+import FooterAltiplano from '../Footer';
 import "../../styles/Carrito.css";
 
 const Carrito = () => {
@@ -23,6 +24,7 @@ const Carrito = () => {
   };
 
   return (
+    <>
     <div className="carrito-container">
       <NavbarAltiplano />
       <h1>Tu Carrito de Compras</h1>
@@ -99,6 +101,8 @@ const Carrito = () => {
         </>
       )}
     </div>
+    <FooterAltiplano />
+    </>
   );
 };
 

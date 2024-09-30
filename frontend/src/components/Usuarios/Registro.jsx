@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import NavbarAltiplano from '../Navbar';
+import FooterAltiplano from '../Footer';
 import styles from '../../styles/Usuarios.module.css';
 
 const Registro = () => {
@@ -89,6 +90,7 @@ const Registro = () => {
   const passwordChecks = checkPasswordStrength();
 
   return (
+    <>
     <div className={styles.registroContainer}>
       <NavbarAltiplano />
       <div className={styles.usuariosContainer}>
@@ -112,6 +114,8 @@ const Registro = () => {
         {mensaje && <p>{mensaje}</p>}
       </div>
     </div>
+    <FooterAltiplano />
+    </>
   );
 };
 

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom'; 
 import NavbarAltiplano from '../Navbar';
+import FooterAltiplano from '../Footer';
 import styles from '../../styles/Usuarios.module.css';
 
 const MisFavoritos = () => {
@@ -66,6 +67,7 @@ const MisFavoritos = () => {
   };
 
   return (
+    <>
     <div className={styles.favoritoSection}>
     <NavbarAltiplano />
     <div className={styles.section}>
@@ -97,6 +99,8 @@ const MisFavoritos = () => {
       </button>
     </div>
     </div>
+    <FooterAltiplano />
+    </>
   );
 };
 

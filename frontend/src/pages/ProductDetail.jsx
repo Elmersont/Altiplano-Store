@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import NavbarAltiplano from '../components/Navbar';
+import FooterAltiplano from '../components/Footer';
 import { useAuth } from '../context/AutentificacionContext';
 import '../styles/ProductDetail.css'
 
@@ -35,6 +36,7 @@ const ProductDetails = () => {
   }
 
   return (
+    <>
     <div className='details'>
       <NavbarAltiplano />
       <div className="product-card">
@@ -60,6 +62,8 @@ const ProductDetails = () => {
         <p>*Debes iniciar sesión para ver precios y configurar tu lienzo</p>
       )}
     </div>
+    <FooterAltiplano />
+    </>
   );
 };
 

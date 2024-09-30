@@ -2,6 +2,7 @@ import React from 'react';
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import NavbarAltiplano from '../components/Navbar';
+import FooterAltiplano from '../components/Footer';
 import '../styles/Store.css'
 
 const Store = () => {
@@ -21,6 +22,7 @@ const Store = () => {
   }, []);
 
   return (
+    <>
     <div className="store-container">
       <NavbarAltiplano />
       <h1>Nos inspira Chile y sus raíces...</h1>
@@ -36,7 +38,9 @@ const Store = () => {
       </div>
       <button className='btn2'>👤Iniciar Sesión</button>
       <p>*Debes iniciar sesión para ver precios y agregar al carrito</p>
-    </div>
+    </div>    
+    <FooterAltiplano />    
+  </>
   );
 };
 
