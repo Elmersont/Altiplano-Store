@@ -29,9 +29,10 @@ function Home() {
   return (
     <>
       <NavbarAltiplano />
+      
       <section className="hero-section d-flex align-items-center justify-content-center text-center">
         <Container className='texto-hero'>
-          <Row>
+          <Row className="justify-content-evenly products-grid">
             <Col>
               <h1 className="display-4 text-dark">Altiplano Store</h1>
               <p className="lead">
@@ -44,7 +45,6 @@ function Home() {
           </Row>
         </Container>
       </section>
-
       <Container className="main-content">
         <h2 className="mt-3 mb-5">Nuestros Productos</h2>
         <Row className="justify-content-evenly products-grid">
