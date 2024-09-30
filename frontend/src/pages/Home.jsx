@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Container, Row, Col, Button } from 'react-bootstrap'; 
 import { useNavigate, Link } from 'react-router-dom';
+import NavbarAltiplano from '../components/Navbar';
 import '../styles/Home.css';
 
 function Home() {
@@ -26,6 +27,7 @@ function Home() {
 
   return (
     <>
+      <NavbarAltiplano />
       <section className="hero-section d-flex align-items-center justify-content-center text-center">
         <Container className='texto-hero'>
           <Row>

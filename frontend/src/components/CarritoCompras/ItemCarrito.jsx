@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import NavbarAltiplano from '../Navbar';
 import { useParams } from 'react-router-dom';
 
 const ProductDetails = () => {
@@ -38,6 +39,7 @@ const ProductDetails = () => {
 
   return (
     <div className='details'>
+      <NavbarAltiplano />
         <div className="product-card">
             <div className='card-left'>
                 <img src={product.imageUrl} alt={product.name} className="product-image" />

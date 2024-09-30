@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import NavbarAltiplano from '../Navbar';
 import styles from '../../styles/Usuarios.module.css';
 
 const RecuperarContrasena = () => {
@@ -25,6 +26,7 @@ const RecuperarContrasena = () => {
 
   return (
     <div className={styles.recuperarContainer}>
+    <NavbarAltiplano />
     <div className={styles.usuariosContainer}>
       <h2>Recuperar Contraseña</h2>
       <form onSubmit={handleSubmit}>

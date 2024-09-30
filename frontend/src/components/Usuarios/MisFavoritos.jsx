@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom'; 
+import NavbarAltiplano from '../Navbar';
 import styles from '../../styles/Usuarios.module.css';
 
 const MisFavoritos = () => {
@@ -66,6 +67,7 @@ const MisFavoritos = () => {
 
   return (
     <div className={styles.favoritoSection}>
+    <NavbarAltiplano />
     <div className={styles.section}>
     <h2>Mis Lienzos Favoritos</h2>
       {isLoading ? (

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import NavbarAltiplano from '../Navbar';
 import styles from '../../styles/Cuestionario.module.css';
 
 const Cuestionario = () => {
@@ -47,6 +48,8 @@ const Cuestionario = () => {
   };
 
   return (
+  <>
+    <NavbarAltiplano />
     <div className={styles.cuestionarioContainer}>
       <h2>¿Cuántos colores tendrá tu lienzo?</h2>
       <div>
@@ -138,6 +141,7 @@ const Cuestionario = () => {
         <button className={styles.navButton} onClick={handleGoToProduct}>Ir a ver lienzos</button>
       )}
     </div>
+</>
   );
 };
 

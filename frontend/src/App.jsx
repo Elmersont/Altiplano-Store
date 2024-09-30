@@ -10,7 +10,6 @@ import PerfilUsuario from './components/Usuarios/PerfilUsuario.jsx';
 import MisFavoritos from './components/Usuarios/MisFavoritos.jsx';
 import Store from './pages/Store';
 import ProductDetail from './pages/ProductDetail';
-import NavbarAltiplano from './components/Navbar.jsx';
 import FooterAltiplano from './components/Footer.jsx';
 import Conocenos from './pages/Conocenos';
 import Carrito from './components/CarritoCompras/Carrito'; 
@@ -23,7 +22,6 @@ function App() {
   return (
     <AuthProvider>
       <BrowserRouter>
-        <NavbarAltiplano />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/conocenos" element={<Conocenos />} />

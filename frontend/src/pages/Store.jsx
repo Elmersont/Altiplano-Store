@@ -1,6 +1,7 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import NavbarAltiplano from '../components/Navbar';
 import '../styles/Store.css'
 
 const Store = () => {
@@ -21,11 +22,12 @@ const Store = () => {
 
   return (
     <div className="store-container">
+      <NavbarAltiplano />
       <h1>Nos inspira Chile y sus raíces...</h1>
       <div className="products-grid">
         {products.map(product => (
           <div key={product.id} className="product-card">
-            <Link to={`/product/${product.id}`}>
+            <Link to={`/product/${product.id}`} className="product-link">
               <img src={product.imageUrl} alt={product.name} className="product-image" />
               <h2>{product.name}</h2>
             </Link>

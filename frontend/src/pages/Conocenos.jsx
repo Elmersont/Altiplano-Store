@@ -1,11 +1,13 @@
 // src/pages/Conocenos.jsx
 import React from 'react';
 import { Container, Row, Col, Card, Button } from 'react-bootstrap'; 
+import NavbarAltiplano from '../components/Navbar';
 import '../styles/Conocenos.css';
 
 const Conocenos = () => {
   return (
     <Container className="margen"> 
+      <NavbarAltiplano />
       <Row className="text-center mb-4">
         <Col>
           <h1 className="display-4">Conócenos</h1>

@@ -44,3 +44,16 @@
   .btn2:hover {
     background-color: #0056b3;
   }
+
+  .product-link {
+    text-decoration: none; 
+    color: inherit; /* Mantiene el color del texto por defecto o puedes establecer un color personalizado */
+    transition: color 0.3s ease;
+  }
+  
+  
+  .product-link:hover {
+    color: #282A2D; 
+    transform: scale(1.05);
+  }
+  

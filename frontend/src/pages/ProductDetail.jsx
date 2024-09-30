@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
+import NavbarAltiplano from '../components/Navbar';
 import { useAuth } from '../context/AutentificacionContext';
 import '../styles/ProductDetail.css'
 
@@ -35,6 +36,7 @@ const ProductDetails = () => {
 
   return (
     <div className='details'>
+      <NavbarAltiplano />
       <div className="product-card">
         <div className='card-left'>
           <img src={product.imageUrl} alt={product.name} className="product-image" />

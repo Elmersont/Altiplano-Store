@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import NavbarAltiplano from '../Navbar';
 import { useAuth } from '../../context/AutentificacionContext'; 
 import styles from '../../styles/Usuarios.module.css';
 import MisFavoritos from './MisFavoritos'; 
@@ -126,6 +127,7 @@ const PerfilUsuario = () => {
 
   return (
     <div className={styles.perfilUsuarioContainer}>
+      <NavbarAltiplano />
       <div className={styles.profileHeader}>
         <label htmlFor="file-upload" className={styles.fotoPerfilLabel}>
           {userData.fotoPerfil ? (

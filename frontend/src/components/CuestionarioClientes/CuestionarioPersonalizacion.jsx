@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
+import NavbarAltiplano from '../Navbar';
 import styles from '../../styles/Cuestionario.module.css';
 
 const CuestionarioPersonalizacion = () => {
@@ -119,6 +120,7 @@ const CuestionarioPersonalizacion = () => {
 
   return (
     <div className={styles.cuestionario}>
+    <NavbarAltiplano />
     <div className={styles.cuestionarioContainer}>
  
       <div className={styles.precioActual}>

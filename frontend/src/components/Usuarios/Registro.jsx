@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import NavbarAltiplano from '../Navbar';
 import styles from '../../styles/Usuarios.module.css';
 
 const Registro = () => {
@@ -89,6 +90,7 @@ const Registro = () => {
 
   return (
     <div className={styles.registroContainer}>
+      <NavbarAltiplano />
       <div className={styles.usuariosContainer}>
         <h2>Registro</h2>
         <form onSubmit={handleSubmit}>
