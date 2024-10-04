@@ -59,6 +59,8 @@
 .product-image{
   border-radius: 100%;
   margin-bottom: 25px;
+  width: 324px!important;
+  height: 324px!important;
 }
 
 .product-image:hover {

@@ -13,7 +13,7 @@ function Home() {
     const fetchProducts = async () => {
       const data = [
         { id: 1, name: 'Granjera', imageUrl: 'https://altiplanostore.cl/wp-content/uploads/2021/02/GRANJERA-2-324x324.png', description: ' Puerta Granjera de estilo rústico.' },
-        { id: 2, name: 'Indómita', imageUrl: 'https://altiplanostore.cl/wp-content/uploads/2021/02/INDOMITA-1-324x324.png', description: 'Puerta Indómita, de diseño moderno.' },
+        { id: 2, name: 'Indómita', imageUrl: '/assets/images/INDOMITA.png', description: 'Puerta Indómita, de diseño moderno.' },
         { id: 3, name: 'Nativa', imageUrl: 'https://altiplanostore.cl/wp-content/uploads/2021/02/NATIVA-1-1-324x324.png', description: 'Puerta Nativa, inspirada en los pueblos originarios.' }
       ];
       setProducts(data);
