@@ -20,7 +20,7 @@ const Conocenos = () => {
       </Row>
       <Row className="align-items-center mb-5">
         <Col md={6}>
-          <Card className="border-0">
+          <Card className="border-3">
             <Card.Img 
               src="/assets/images/FOTO PERFIL.png" 
               alt="Nuestro Equipo" 

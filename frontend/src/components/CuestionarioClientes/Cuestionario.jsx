@@ -50,6 +50,7 @@ const Cuestionario = () => {
 
   return (
   <>
+  <div className={styles.cuestionario2}>
     <NavbarAltiplano />
     <div className={styles.cuestionarioContainer}>
       <h2>¿Cuántos colores tendrá tu lienzo?</h2>
@@ -142,7 +143,8 @@ const Cuestionario = () => {
         <button className={styles.navButton} onClick={handleGoToProduct}>Ir a ver lienzos</button>
       )}
     </div>
-    <FooterAltiplano />
+   
+    </div> <FooterAltiplano />
 </>
   );
 };

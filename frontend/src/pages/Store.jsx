@@ -36,8 +36,6 @@ const Store = () => {
           </div>
         ))}
       </div>
-      <button className='btn2'>👤Iniciar Sesión</button>
-      <p>*Debes iniciar sesión para ver precios y agregar al carrito</p>
     </div>    
     <FooterAltiplano />    
   </>
