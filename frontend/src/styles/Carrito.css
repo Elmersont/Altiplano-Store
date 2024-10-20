@@ -1,72 +1,147 @@
 .carrito-container {
-    width: 80%;
-    margin: 0 auto;
-    padding: 200px 30px 50px 30px !important;
+  width: 80%;
+  margin: 0 auto;
+  padding: 200px 15px 100px 15px; /* Ajustado para mejorar el espaciado en pantallas más pequeñas */
+}
+
+.carrito-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+
+.carrito-table th, 
+.carrito-table td {
+  border: 1px solid #ddd;
+  padding: 10px;
+}
+
+.carrito-table th {
+  text-align: left;
+  background-color: #f4f4f4;
+  font-size: 16px;
+}
+
+.carrito-table td {
+  font-size: 14px;
+}
+
+/* Imagen del producto */
+.imagen-producto {
+  width: 80px; /* Ajustado para pantallas más grandes */
+  height: 80px;
+  margin-right: 10px;
+  vertical-align: middle;
+  object-fit: cover;
+}
+
+.eliminar-producto {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 18px;
+}
+
+
+.input-cupon {
+  width: 200px;
+  padding: 5px;
+  margin-right: 10px;
+}
+
+.btn-aplicar-cupon {
+  padding: 5px 10px;
+  background-color: #333;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+}
+
+.carrito-totales {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap; 
+}
+
+.totales-carrito {
+  text-align: right;
+  width: 100%; 
+  margin-top: 10px;
+}
+
+.btn-finalizar-compra {
+  background-color: #333;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  text-align: center;
+  font-size: 16px;
+}
+
+
+@media (max-width: 768px) {
+  .carrito-container {
+    width: 95%;
+    padding: 150px 10px 20px 10px;
   }
-  
-  .carrito-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-bottom: 20px;
-  }
-  
+
   .carrito-table th, 
   .carrito-table td {
-    border: 1px solid #ddd;
+    font-size: 14px;
     padding: 8px;
   }
-  
-  .carrito-table th {
-    text-align: left;
-    background-color: #f4f4f4;
+
+  .imagen-producto {
+    width: 60px;
+    height: 60px;
   }
-  
+
+  .carrito-totales {
+    flex-direction: column; 
+    align-items: flex-start;
+  }
+
+  .totales-carrito {
+    text-align: left;
+    margin-top: 15px;
+  }
+
+  .btn-finalizar-compra {
+    padding: 10px;
+    font-size: 14px;
+  }
+
+  .input-cupon {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .carrito-container {
+    padding-top: 200px;
+  }
+
+  .carrito-table th, 
+  .carrito-table td {
+    font-size: 12px;
+    padding: 6px;
+  }
+
   .imagen-producto {
     width: 50px;
     height: 50px;
-    margin-right: 10px;
-    vertical-align: middle;
-    object-fit: cover;
   }
-  
-  .eliminar-producto {
-    background-color: transparent;
-    border: none;
-    cursor: pointer;
-    font-size: 18px;
-  }
-  
-  .input-cupon {
-    width: 200px;
-    padding: 5px;
-    margin-right: 10px;
-  }
-  
-  .btn-aplicar-cupon {
-    padding: 5px 10px;
-    background-color: #333;
-    color: #fff;
-    border: none;
-    cursor: pointer;
-  }
-  
-  .carrito-totales {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  
-  .totales-carrito {
-    text-align: right;
-  }
-  
+
   .btn-finalizar-compra {
-    background-color: #333;
-    color: #fff;
-    padding: 10px 20px;
-    border: none;
-    cursor: pointer;
-    width: 100%;
-    text-align: center;
+    font-size: 12px;
+    padding: 8px;
   }
-  
+
+  .input-cupon {
+    width: 100%;
+  }
+}

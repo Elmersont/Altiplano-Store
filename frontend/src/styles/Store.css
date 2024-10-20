@@ -1,68 +1,136 @@
 .store-container {
-    padding-top:170px!important; 
-    padding-bottom:50px!important;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-  }
+  padding-top: 170px !important;
+  padding-bottom: 50px !important;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
 
+/* Contenedor secundario de la tienda */
+.store-container2 {
+  padding-top: 250px !important;
+  padding-bottom: 150px !important;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Grid de productos */
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); /* Ajuste automático en función del tamaño de la pantalla */
+  gap: 20px;
+  width: 100%;
+  max-width: 1200px;
+  margin: 20px auto;
+}
+
+/* Tarjeta de producto */
+.product-card {
+  transition: transform 0.3s ease;
+}
+
+.product-card:hover {
+  transform: scale(1.05); /* Efecto hover para ampliar la tarjeta */
+}
+
+/* Imagen del producto */
+.product-image {
+  width: 100%;
+  height: auto;
+  border-radius: 8px; /* Añadir bordes redondeados */
+}
+
+/* Enlace para ver más detalles */
+.verMas {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* Botón de acción */
+.btn2 {
+  margin-top: 20px;
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.btn2:hover {
+  background-color: #0056b3;
+}
+
+/* Estilo para los enlaces de productos */
+.product-link {
+  text-decoration: none; 
+  color: inherit; /* Mantiene el color del texto por defecto */
+  transition: color 0.3s ease;
+}
+
+.product-link:hover {
+  color: #282A2D;
+  transform: scale(1.05); /* Efecto hover para ampliar el enlace */
+}
+
+/* Media Queries para pantallas medianas */
+@media (max-width: 768px) {
+  .store-container, 
   .store-container2 {
-    padding-top:250px!important; 
-    padding-bottom:150px!important;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-  }
-  
-  .products-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    gap: 20px;
-    width: 100%;
-    max-width: 1200px;
-    margin: 20px auto;
-  }
-  
-  .product-card:hover {
-    transform: scale(1.05);
-  }
-  
-  .product-image {
-    width: 100%;
-    height: auto;
-  }
-  
-  .verMas {
-    text-decoration: none;
-    color: inherit;
-  }
-  
-  .btn2 {
-    margin-top: 20px;
-    padding: 10px 20px;
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-  }
-  
-  .btn2:hover {
-    background-color: #0056b3;
+    padding-top: 120px !important;
+    padding-bottom: 30px !important;
+    width: 90%;
   }
 
-  .product-link {
-    text-decoration: none; 
-    color: inherit; /* Mantiene el color del texto por defecto o puedes establecer un color personalizado */
-    transition: color 0.3s ease;
+  .products-grid {
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* Ajustar columnas en pantallas medianas */
+    gap: 15px;
   }
-  
-  
-  .product-link:hover {
-    color: #282A2D; 
-    transform: scale(1.05);
+
+  .btn2 {
+    padding: 8px 16px; /* Ajustar el tamaño del botón en pantallas medianas */
+    font-size: 14px;
   }
-  
+}
+
+/* Media Queries para pantallas pequeñas (móviles) */
+@media (max-width: 480px) {
+  .store-container, 
+  .store-container2 {
+    padding-top: 100px !important;
+    padding-bottom: 20px !important;
+    width: 100%;
+  }
+
+  .products-grid {
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); /* Menos espacio para productos en móviles */
+    gap: 10px;
+  }
+
+  .product-image {
+    max-width: 100%; /* Asegura que las imágenes no sobrepasen el contenedor en móviles */
+  }
+
+  .btn2 {
+    padding: 6px 12px; /* Ajustar el tamaño del botón para móviles */
+    font-size: 12px;
+  }
+
+  h1 {
+    font-size: 1.4rem; /* Ajustar tamaño de texto para móviles */
+  }
+
+  .product-card:hover {
+    transform: none; /* Desactivar el efecto hover en pantallas táctiles */
+  }
+}
