@@ -4,6 +4,7 @@ import Home from './pages/Home.jsx';
 import Cuestionario from './components/CuestionarioClientes/Cuestionario.jsx';
 import CuestionarioPersonalizacion from './components/CuestionarioClientes/CuestionarioPersonalizacion.jsx';
 import Login from './components/Usuarios/Login.jsx';
+import NoLogin from './pages/StoreSinAut.jsx';
 import RecuperarContrasena from './components/Usuarios/RecuperarContrasena.jsx';
 import Registro from './components/Usuarios/Registro.jsx';
 import PerfilUsuario from './components/Usuarios/PerfilUsuario.jsx';
@@ -29,6 +30,7 @@ function App() {
               <Store />
             </ProtectedRoute>
           } />
+          <Route path="/NoLogin" element={<NoLogin />} />
           <Route path="/cuestionario" element={<Cuestionario />} />
           <Route path="/personalizacion" element={<CuestionarioPersonalizacion />} />
           <Route path="/configurar-lienzo/:id" element={<CuestionarioPersonalizacion />} />

@@ -1,6 +1,15 @@
 .store-container {
-    padding-top:150px!important; 
-    padding-bottom: 50px;
+    padding-top:170px!important; 
+    padding-bottom:50px!important;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .store-container2 {
+    padding-top:250px!important; 
+    padding-bottom:150px!important;
     display: flex;
     flex-direction: column;
     align-items: center;
