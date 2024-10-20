@@ -9,7 +9,7 @@ import '../styles/NavbarAltiplano.css';
 const logoNavbar = '/assets/images/logoNavbar.png';
 
 function NavbarAltiplano() {
-  const { user, logout, loading } = useAuth(); // Ahora se tiene acceso al estado de carga
+  const { user, logout, loading } = useAuth(); 
   const navigate = useNavigate();
 
   const handleLogin = () => {
@@ -18,6 +18,10 @@ function NavbarAltiplano() {
 
   const handleProfile = () => {
     navigate('/perfil'); 
+  };
+
+  const handleCarrito = () => {
+    navigate('/Carrito'); 
   };
 
   return (
@@ -61,6 +65,9 @@ function NavbarAltiplano() {
                 </span>
                 <button className="profile-button mx-3" onClick={handleProfile}>
                   Mi Perfil
+                </button>
+                <button className="profile-button2" onClick={handleCarrito}>
+                🛒
                 </button>
                 <button className="cerrar-button mx-3" onClick={logout}>
                   Cerrar sesión
