@@ -15,9 +15,9 @@ const ProductDetails = () => {
   useEffect(() => {
     const fetchProduct = async () => {
       const data = [
-        { id: 1, name: 'Granjera', price: 189990, imageUrl: 'https://altiplanostore.cl/wp-content/uploads/2021/02/GRANJERA-2-324x324.png', description: 'La línea Granjera son puertas de granero inspiradas en el campesino chileno, esta en particular tiene un diseño de flecha que además de brindar una apariencia rústica da la sensación de movimiento.' },
+        { id: 1, name: 'Granjera', price: 189990, imageUrl: '/assets/images/GRANJERA.png', description: 'La línea Granjera son puertas de granero inspiradas en el campesino chileno, esta en particular tiene un diseño de flecha que además de brindar una apariencia rústica da la sensación de movimiento.' },
         { id: 2, name: 'Indómita', price: 279390, imageUrl: '/assets/images/INDOMITA.png', description: 'La línea Indómita son puertas de granero inspiradas en la flora y fauna de Chile.' },
-        { id: 3, name: 'Nativa', price: 303000, imageUrl: 'https://altiplanostore.cl/wp-content/uploads/2021/02/NATIVA-1-1-324x324.png', description: 'Línea Nativa, son puertas de granero inspiradas en los pueblos originarios de Chile.' }
+        { id: 3, name: 'Nativa', price: 303000, imageUrl: '/assets/images/NATIVA.png', description: 'Línea Nativa, son puertas de granero inspiradas en los pueblos originarios de Chile.' }
       ];
       const foundProduct = data.find(p => p.id === parseInt(id));
       setProduct(foundProduct);
